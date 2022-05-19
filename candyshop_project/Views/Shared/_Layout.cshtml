@@ -29,10 +29,20 @@
                         <li><a asp-controller="Contact" asp-action="Index">Contact Us</a></li>
                         @await Component.InvokeAsync("ShoppingCartSummary")
                         <partial name="_LoginPartial" />
-                        <li><a asp-controller="Statistic" asp-action="Index">Statistic</a></li>
+                        
                         @if (User.IsInRole("Admin"))
                         {
-                            <li><a asp-controller="Admin" asp-action="Index">Admin</a></li>
+                            <li class="dropdown">
+                                <a class="dropdown-toggle" href="#" data-toggle="dropdown">Admin<b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    <li>
+                                         <a asp-controller="Admin" asp-action="Index">Admin</a>
+                                    </li>
+                                    <li>
+                                        <a asp-controller="Statistic" asp-action="Index">Sale insight</a>
+                                        </li>
+                                </ul>
+                            </li>
 
                         }
                     </ul>

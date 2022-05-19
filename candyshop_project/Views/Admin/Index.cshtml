@@ -1,6 +1,15 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
+﻿<div>
+    <h2>Welcome to admin page</h2>
+</div>
 
-}
+<div>
+    <h2>Product Settings</h2>
+    <div>
+        <h3>Create Product</h3>
+        <a class="btn btn-primary" asp-controller="Admin" asp-action="CreateProduct">Create Product</a>
+        <h3>Update Product</h3>
+        <a class="btn btn-primary" asp-controller="Admin" asp-action="UpdateProduct">Update Product</a>
+        <h3>Delete Product</h3>
+        <a class="btn btn-primary" asp-controller="Admin" asp-action="DeleteProduct">Delete Product</a>
+    </div>
+</div>

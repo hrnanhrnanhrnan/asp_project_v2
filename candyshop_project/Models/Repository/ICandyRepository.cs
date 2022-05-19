@@ -10,5 +10,6 @@ namespace Candyshop.Models
         IEnumerable<Candy> GetAllCandy { get; }
         IEnumerable<Candy> GetCandyOnSale { get; }
         Candy GetCandyById(int candyId);
+        Candy CreateCandy(Candy candy);
     }
 }

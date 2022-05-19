@@ -32,6 +32,17 @@ namespace Candyshop.Models
             }
         }
 
+        public Candy CreateCandy(Candy candy)
+        {
+            if (candy != null)
+            {
+                _appDbContext.Candies.Add(candy);
+                _appDbContext.SaveChanges();
+                return candy;
+            }
+            return null;
+        }
+
         public Candy GetCandyById(int candyId)
         {
             return _appDbContext.Candies.FirstOrDefault(c => c.CandyId == candyId);
