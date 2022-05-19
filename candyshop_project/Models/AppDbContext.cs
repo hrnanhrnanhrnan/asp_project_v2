@@ -41,7 +41,8 @@ namespace Candyshop.Models
                 CategoryId = 1,
                 ImageUrl = "\\Images\\chocolet.candy.jpg",
                 ImageThumbnailUrl = "\\Images\\thumbnails\\chocolateCandy3-small.jpg",
-                IsInStock = true,
+                AmountInStock=10
+                //IsInStock = true,
                 //IsOnSale = false
 
             });
@@ -54,7 +55,8 @@ namespace Candyshop.Models
                 CategoryId = 1,
                 ImageUrl = "\\Images\\chocolateCandy.jpg",
                 ImageThumbnailUrl = "\\Images\\thumbnails\\chocolateCandy-small.jpg",
-                IsInStock = true,
+                AmountInStock = 15
+                //IsInStock = true,
                 //IsOnSale = true
 
             });
@@ -67,7 +69,8 @@ namespace Candyshop.Models
                 CategoryId = 1,
                 ImageUrl = "\\Images\\chocolateCandy2.jpg",
                 ImageThumbnailUrl = "\\Images\\thumbnails\\chocolateCandy2-small.jpg",
-                IsInStock = true,
+                AmountInStock = 10
+                //IsInStock = true,
                 //IsOnSale = true
 
             });
@@ -81,7 +84,8 @@ namespace Candyshop.Models
                 CategoryId = 2,
                 ImageUrl = "\\Images\\FruitCandy.jpg",
                 ImageThumbnailUrl = "\\Images\\thumbnails\\FruitCandy-small.jpg",
-                IsInStock = true,
+                AmountInStock = 20
+                //IsInStock = true,
                 //IsOnSale = true
 
             });
@@ -94,7 +98,8 @@ namespace Candyshop.Models
                 CategoryId = 2,
                 ImageUrl = "\\Images\\fruitCandy2.jpg",
                 ImageThumbnailUrl = "\\Images\\thumbnails\\fruitCandy2-small.jpg",
-                IsInStock = true,
+                AmountInStock = 20
+                //IsInStock = true,
                 //IsOnSale = false
 
             });
@@ -107,7 +112,8 @@ namespace Candyshop.Models
                 CategoryId = 2,
                 ImageUrl = "\\Images\\fruitCandy3.jpg",
                 ImageThumbnailUrl = "\\Images\\thumbnails\\fruitCandy3-small.jpg",
-                IsInStock = false,
+                AmountInStock = 25
+                //IsInStock = true,
                 //IsOnSale = true
 
             });
@@ -120,7 +126,8 @@ namespace Candyshop.Models
                 CategoryId = 3,
                 ImageUrl = "\\Images\\gummyCandy.jpg",
                 ImageThumbnailUrl = "\\Images\\thumbnails\\gummyCandy-small.jpg",
-                IsInStock = true,
+                AmountInStock = 25
+                //IsInStock = true,
                 //IsOnSale = false
 
             });
@@ -133,7 +140,8 @@ namespace Candyshop.Models
                 CategoryId = 3,
                 ImageUrl = "\\Images\\gummyCandy2.jpg",
                 ImageThumbnailUrl = "\\Images\\thumbnails\\gummyCandy2-small.jpg",
-                IsInStock = true,
+                AmountInStock = 8
+                //IsInStock = true,
                 //IsOnSale = true
 
             });
@@ -146,7 +154,8 @@ namespace Candyshop.Models
                 CategoryId = 3,
                 ImageUrl = "\\Images\\gummyCandy3.jpg",
                 ImageThumbnailUrl = "\\Images\\thumbnails\\gummyCandy3-small.jpg",
-                IsInStock = true,
+                AmountInStock = 30
+                //IsInStock = true,
                 //IsOnSale = true
 
             });
@@ -158,8 +167,8 @@ namespace Candyshop.Models
                 Description = " Lorem ipsum dolor sit amet, consectetur adiposcing elit, sed do eiusmod tempor...",
                 CategoryId = 4,
                 ImageUrl = "\\Images\\halloweenCandy.jpg",
-                ImageThumbnailUrl = "\\Images\\thumbnails\\halloweenCandy-small.jpg",
-                IsInStock = true,
+                ImageThumbnailUrl = "\\Images\\thumbnails\\halloweenCandy-small.jpg"
+                //IsInStock = true,
                 //IsOnSale = true
 
             });
@@ -171,8 +180,8 @@ namespace Candyshop.Models
                 Description = " Lorem ipsum dolor sit amet, consectetur adiposcing elit, sed do eiusmod tempor...",
                 CategoryId = 4,
                 ImageUrl = "\\Images\\halloweenCandy2.jpg",
-                ImageThumbnailUrl = "\\Images\\thumbnails\\halloweenCandy2-small.jpg",
-                IsInStock = false,
+                ImageThumbnailUrl = "\\Images\\thumbnails\\halloweenCandy2-small.jpg"
+                //IsInStock = true,
                 //IsOnSale = true
 
             });
@@ -185,7 +194,8 @@ namespace Candyshop.Models
                 CategoryId = 4,
                 ImageUrl = "\\Images\\halloweenCandy3.jpg",
                 ImageThumbnailUrl = "\\Images\\thumbnails\\halloweenCandy3-small.jpg",
-                IsInStock = true,
+                AmountInStock = 7
+                //IsInStock = true,
                 //IsOnSale = true
 
             });
@@ -198,7 +208,8 @@ namespace Candyshop.Models
                 CategoryId = 5,
                 ImageUrl = "\\Images\\hardCandy.jpg",
                 ImageThumbnailUrl = "\\Images\\thumbnails\\hardCandy-small.jpg",
-                IsInStock = true,
+                AmountInStock = 150
+                //IsInStock = true,
                 //IsOnSale = false
 
             });
@@ -211,7 +222,8 @@ namespace Candyshop.Models
                 CategoryId = 5,
                 ImageUrl = "\\Images\\hardCandy2.jpg",
                 ImageThumbnailUrl = "\\Images\\thumbnails\\hardCandy2-small.jpg",
-                IsInStock = false,
+                AmountInStock = 150
+                //IsInStock = true,
                 //IsOnSale = true
 
             });
@@ -224,7 +236,8 @@ namespace Candyshop.Models
                 CategoryId = 5,
                 ImageUrl = "\\Images\\hardCandy3.jpg",
                 ImageThumbnailUrl = "\\Images\\thumbnails\\hardCandy3-small.jpg",
-                IsInStock = true,
+                AmountInStock = 114
+                //IsInStock = true,
                 //IsOnSale = false
 
             });

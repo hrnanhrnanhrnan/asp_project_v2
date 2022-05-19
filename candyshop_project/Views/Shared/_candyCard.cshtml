@@ -10,10 +10,13 @@
         </div>
         <div class="addToCart">
             <p class="button">
-                <a class="btn btn-primary"
-                   asp-controller="ShoppingCart"
-                   asp-action="AddToShoppingCart"
-                   asp-route-candyId="@Model.CandyId">Add to Cart</a>
+                @if (Model.IsInStock())
+                {
+                    <a class="btn btn-primary"
+                       asp-controller="ShoppingCart"
+                       asp-action="AddToShoppingCart"
+                       asp-route-candyId="@Model.CandyId">Add to Cart</a>
+                }
             </p>
         </div>
     </div>
