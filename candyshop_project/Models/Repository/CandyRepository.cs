@@ -27,7 +27,8 @@ namespace Candyshop.Models
         {
             get
             {
-                return _appDbContext.Candies.Include(c => c.Category).Where(p => p.IsOnSale);
+                var res = _appDbContext.Candies.Include(c => c.Category).Include(c => c.Discounts).ThenInclude(d => d.Campaign).ToArray();
+                return res.Where(p => p.IsOnSale);
             }
         }
 

@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Candyshop.Models;
 
 namespace Candyshop.Models
 {
@@ -41,7 +42,7 @@ namespace Candyshop.Models
                 ImageUrl = "\\Images\\chocolet.candy.jpg",
                 ImageThumbnailUrl = "\\Images\\thumbnails\\chocolateCandy3-small.jpg",
                 IsInStock = true,
-                IsOnSale = false
+                //IsOnSale = false
 
             });
             modelBuilder.Entity<Candy>().HasData(new Candy
@@ -54,7 +55,7 @@ namespace Candyshop.Models
                 ImageUrl = "\\Images\\chocolateCandy.jpg",
                 ImageThumbnailUrl = "\\Images\\thumbnails\\chocolateCandy-small.jpg",
                 IsInStock = true,
-                IsOnSale = true
+                //IsOnSale = true
 
             });
             modelBuilder.Entity<Candy>().HasData(new Candy
@@ -67,7 +68,7 @@ namespace Candyshop.Models
                 ImageUrl = "\\Images\\chocolateCandy2.jpg",
                 ImageThumbnailUrl = "\\Images\\thumbnails\\chocolateCandy2-small.jpg",
                 IsInStock = true,
-                IsOnSale = true
+                //IsOnSale = true
 
             });
 
@@ -81,7 +82,7 @@ namespace Candyshop.Models
                 ImageUrl = "\\Images\\FruitCandy.jpg",
                 ImageThumbnailUrl = "\\Images\\thumbnails\\FruitCandy-small.jpg",
                 IsInStock = true,
-                IsOnSale = true
+                //IsOnSale = true
 
             });
             modelBuilder.Entity<Candy>().HasData(new Candy
@@ -94,7 +95,7 @@ namespace Candyshop.Models
                 ImageUrl = "\\Images\\fruitCandy2.jpg",
                 ImageThumbnailUrl = "\\Images\\thumbnails\\fruitCandy2-small.jpg",
                 IsInStock = true,
-                IsOnSale = false
+                //IsOnSale = false
 
             });
             modelBuilder.Entity<Candy>().HasData(new Candy
@@ -107,7 +108,7 @@ namespace Candyshop.Models
                 ImageUrl = "\\Images\\fruitCandy3.jpg",
                 ImageThumbnailUrl = "\\Images\\thumbnails\\fruitCandy3-small.jpg",
                 IsInStock = false,
-                IsOnSale = true
+                //IsOnSale = true
 
             });
             modelBuilder.Entity<Candy>().HasData(new Candy
@@ -120,7 +121,7 @@ namespace Candyshop.Models
                 ImageUrl = "\\Images\\gummyCandy.jpg",
                 ImageThumbnailUrl = "\\Images\\thumbnails\\gummyCandy-small.jpg",
                 IsInStock = true,
-                IsOnSale = false
+                //IsOnSale = false
 
             });
             modelBuilder.Entity<Candy>().HasData(new Candy
@@ -133,7 +134,7 @@ namespace Candyshop.Models
                 ImageUrl = "\\Images\\gummyCandy2.jpg",
                 ImageThumbnailUrl = "\\Images\\thumbnails\\gummyCandy2-small.jpg",
                 IsInStock = true,
-                IsOnSale = true
+                //IsOnSale = true
 
             });
             modelBuilder.Entity<Candy>().HasData(new Candy
@@ -146,7 +147,7 @@ namespace Candyshop.Models
                 ImageUrl = "\\Images\\gummyCandy3.jpg",
                 ImageThumbnailUrl = "\\Images\\thumbnails\\gummyCandy3-small.jpg",
                 IsInStock = true,
-                IsOnSale = true
+                //IsOnSale = true
 
             });
             modelBuilder.Entity<Candy>().HasData(new Candy
@@ -159,7 +160,7 @@ namespace Candyshop.Models
                 ImageUrl = "\\Images\\halloweenCandy.jpg",
                 ImageThumbnailUrl = "\\Images\\thumbnails\\halloweenCandy-small.jpg",
                 IsInStock = true,
-                IsOnSale = true
+                //IsOnSale = true
 
             });
             modelBuilder.Entity<Candy>().HasData(new Candy
@@ -172,7 +173,7 @@ namespace Candyshop.Models
                 ImageUrl = "\\Images\\halloweenCandy2.jpg",
                 ImageThumbnailUrl = "\\Images\\thumbnails\\halloweenCandy2-small.jpg",
                 IsInStock = false,
-                IsOnSale = true
+                //IsOnSale = true
 
             });
             modelBuilder.Entity<Candy>().HasData(new Candy
@@ -185,7 +186,7 @@ namespace Candyshop.Models
                 ImageUrl = "\\Images\\halloweenCandy3.jpg",
                 ImageThumbnailUrl = "\\Images\\thumbnails\\halloweenCandy3-small.jpg",
                 IsInStock = true,
-                IsOnSale = true
+                //IsOnSale = true
 
             });
             modelBuilder.Entity<Candy>().HasData(new Candy
@@ -198,7 +199,7 @@ namespace Candyshop.Models
                 ImageUrl = "\\Images\\hardCandy.jpg",
                 ImageThumbnailUrl = "\\Images\\thumbnails\\hardCandy-small.jpg",
                 IsInStock = true,
-                IsOnSale = false
+                //IsOnSale = false
 
             });
             modelBuilder.Entity<Candy>().HasData(new Candy
@@ -211,7 +212,7 @@ namespace Candyshop.Models
                 ImageUrl = "\\Images\\hardCandy2.jpg",
                 ImageThumbnailUrl = "\\Images\\thumbnails\\hardCandy2-small.jpg",
                 IsInStock = false,
-                IsOnSale = true
+                //IsOnSale = true
 
             });
             modelBuilder.Entity<Candy>().HasData(new Candy
@@ -224,7 +225,7 @@ namespace Candyshop.Models
                 ImageUrl = "\\Images\\hardCandy3.jpg",
                 ImageThumbnailUrl = "\\Images\\thumbnails\\hardCandy3-small.jpg",
                 IsInStock = true,
-                IsOnSale = false
+                //IsOnSale = false
 
             });
 
@@ -619,5 +620,9 @@ namespace Candyshop.Models
                 UserId = "1"
             });
         }
+
+        public DbSet<Candyshop.Models.Campaign> Campaign { get; set; }
+
+        public DbSet<Candyshop.Models.Discount> Discount { get; set; }
     }
 }
