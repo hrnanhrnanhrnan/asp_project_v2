@@ -39,17 +39,54 @@ namespace Candyshop.Models
             _appDbContext.SaveChanges();
         }
 
-        public List<ChartData> ChartData()
+        public List<ChartData> AmountPerDayChartData()
         {
-            var res = _appDbContext.Orders.GroupBy(x => x.OrderPlaced.Date)
+            var data = _appDbContext.Orders.GroupBy(x => x.OrderPlaced.Date)
                 .Select(group => new ChartData
                 {
                     Date= group.Key.Date,
-                    ProductAmount = group.Count(),
+                    Amount = group.Count(),
 
                 }).ToList();
 
-            return res;
+            return data;
+        }
+
+        public ChartData StateData()
+        {
+            var data = _appDbContext.Orders.GroupBy(x => x.State)
+                .Select(group => new ChartData
+                {
+                    State = group.Key,
+                    Amount = group.Sum(x=>x.OrderTotal),
+                }).OrderByDescending(x=>x.Amount).First();
+
+            return data;
+        }
+
+        public ChartData CityData()
+        {
+            var data = _appDbContext.Orders.GroupBy(x => x.City)
+                .Select(group => new ChartData
+                {
+                    City = group.Key,
+                    Amount = group.Sum(x=>x.OrderTotal),
+                }).OrderByDescending(x => x.Amount).First();
+
+            return data;
+        }
+
+        public List<ChartData> RevenuePerDayChartData()
+        {
+            var data = _appDbContext.Orders.GroupBy(x => x.OrderPlaced.Date)
+                .Select(group => new ChartData
+                {
+                    Date = group.Key.Date,
+                    Amount = group.Sum(x=>x.OrderTotal),
+
+                }).ToList();
+
+            return data;
         }
     }
 }

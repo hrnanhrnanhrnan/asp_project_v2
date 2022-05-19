@@ -1038,7 +1038,7 @@ namespace candyshop_project.Migrations
                         new
                         {
                             Id = "1",
-                            ConcurrencyStamp = "9b9753e5-6f5c-4618-a91b-efc261c38a43",
+                            ConcurrencyStamp = "e2bea85a-261c-47d9-ba4c-757c8a7059c6",
                             Name = "Admin",
                             NormalizedName = "Admin"
                         });
@@ -1137,15 +1137,15 @@ namespace candyshop_project.Migrations
                         {
                             Id = "1",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "27e73973-339f-4602-a0ab-260bd71b79d6",
+                            ConcurrencyStamp = "6caa1f71-4f0f-455b-8098-763ba54b4a83",
                             Email = "admin@admin.se",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@ADMIN.SE",
                             NormalizedUserName = "ADMIN@ADMIN.SE",
-                            PasswordHash = "AQAAAAEAACcQAAAAELtvhH1AnXIoFZyYHzl0Zblq+6K8ghvQ0y8l+BtjgmHe7uV/vCPEeSqINvGyc2TPRA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEBtI4D3zY8s344GG2msXpF2ZD774Xpfo4CFnKiTx3/Q8ma7WK3FJrj6abrjZCngZsA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "bd4eb1c2-9de2-4a3b-aa1e-7ddd42ce954f",
+                            SecurityStamp = "ab54430b-a0e0-4b5d-882c-f5e98aabdd4f",
                             TwoFactorEnabled = false,
                             UserName = "admin@admin.se"
                         });

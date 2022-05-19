@@ -7,6 +7,7 @@
     <link href="~/lib/twitter-bootstrap/css/bootstrap.css" rel="stylesheet" />
     <script src="~/lib/jquery/jquery.js"></script>
     <script src="~/lib/twitter-bootstrap/js/bootstrap.js"></script>
+    <script type="text/javascript" src="~/lib/js/chartScript.js"></script>
     <link href="~/content/Site.css" rel="stylesheet" />
     <title>@ViewBag.Title</title>
 </head>
@@ -39,7 +40,7 @@
                                          <a asp-controller="Admin" asp-action="Index">Admin</a>
                                     </li>
                                     <li>
-                                        <a asp-controller="Statistic" asp-action="Index">Sale insight</a>
+                                        <a asp-controller="Statistic" asp-action="Index">Market insight</a>
                                         </li>
                                 </ul>
                             </li>
@@ -52,7 +53,7 @@
         </nav>
 
         <div class="row">
-            <div class="col-md-3">
+            <div id="image" class="col-md-3">
                 <p class="lead">
                     <img class="img-responsive" src="~/Images/candyshoplogo.png" />
                 </p>

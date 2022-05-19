@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace candyshop_project.Migrations
 {
-    public partial class initmig : Migration
+    public partial class firstpush : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -44,6 +44,21 @@ namespace candyshop_project.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AspNetUsers", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Campaign",
+                columns: table => new
+                {
+                    ID = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(nullable: true),
+                    Start = table.Column<DateTime>(nullable: false),
+                    Days = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Campaign", x => x.ID);
                 });
 
             migrationBuilder.CreateTable(
@@ -198,8 +213,7 @@ namespace candyshop_project.Migrations
                     Price = table.Column<decimal>(nullable: false),
                     ImageUrl = table.Column<string>(nullable: true),
                     ImageThumbnailUrl = table.Column<string>(nullable: true),
-                    IsOnSale = table.Column<bool>(nullable: false),
-                    IsInStock = table.Column<bool>(nullable: false),
+                    AmountInStock = table.Column<int>(nullable: false),
                     CategoryId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
@@ -210,6 +224,34 @@ namespace candyshop_project.Migrations
                         column: x => x.CategoryId,
                         principalTable: "Categores",
                         principalColumn: "CategoryId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Discount",
+                columns: table => new
+                {
+                    ID = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Amount = table.Column<double>(nullable: false),
+                    IsFlatAmount = table.Column<bool>(nullable: false),
+                    CampaignId = table.Column<int>(nullable: false),
+                    CandyId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Discount", x => x.ID);
+                    table.ForeignKey(
+                        name: "FK_Discount_Campaign_CampaignId",
+                        column: x => x.CampaignId,
+                        principalTable: "Campaign",
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Discount_Candies_CandyId",
+                        column: x => x.CandyId,
+                        principalTable: "Candies",
+                        principalColumn: "CandyId",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -265,12 +307,12 @@ namespace candyshop_project.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { "1", "b13b03c8-cf5f-4572-8a5a-cc09893af642", "Admin", "Admin" });
+                values: new object[] { "1", "e2bea85a-261c-47d9-ba4c-757c8a7059c6", "Admin", "Admin" });
 
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
-                values: new object[] { "1", 0, "3eb23ef2-1c40-4921-a899-5eea75510749", "admin@admin.se", false, false, null, "ADMIN@ADMIN.SE", "ADMIN@ADMIN.SE", "AQAAAAEAACcQAAAAEAt5nv2DQdlv9i6tAVYKc1keUJxn/KQkoZPlELqksm576v9S6H1Gl21xv1I7IXv75g==", null, false, "65c54366-8627-435d-a93d-a51b9bca93dd", false, "admin@admin.se" });
+                values: new object[] { "1", 0, "6caa1f71-4f0f-455b-8098-763ba54b4a83", "admin@admin.se", false, false, null, "ADMIN@ADMIN.SE", "ADMIN@ADMIN.SE", "AQAAAAEAACcQAAAAEBtI4D3zY8s344GG2msXpF2ZD774Xpfo4CFnKiTx3/Q8ma7WK3FJrj6abrjZCngZsA==", null, false, "ab54430b-a0e0-4b5d-882c-f5e98aabdd4f", false, "admin@admin.se" });
 
             migrationBuilder.InsertData(
                 table: "Categores",
@@ -318,24 +360,24 @@ namespace candyshop_project.Migrations
 
             migrationBuilder.InsertData(
                 table: "Candies",
-                columns: new[] { "CandyId", "CategoryId", "Description", "ImageThumbnailUrl", "ImageUrl", "IsInStock", "IsOnSale", "Name", "Price" },
+                columns: new[] { "CandyId", "AmountInStock", "CategoryId", "Description", "ImageThumbnailUrl", "ImageUrl", "Name", "Price" },
                 values: new object[,]
                 {
-                    { 1, 1, " Lorem ipsum dolor sit amet, consectetur adiposcing elit, sed do eiusmod tempor...", "\\Images\\thumbnails\\chocolateCandy3-small.jpg", "\\Images\\chocolet.candy.jpg", true, false, "Assorted Chocolet Candy", 4.95m },
-                    { 2, 1, " Lorem ipsum dolor sit amet, consectetur adiposcing elit, sed do eiusmod tempor...", "\\Images\\thumbnails\\chocolateCandy-small.jpg", "\\Images\\chocolateCandy.jpg", true, true, "Assorted Chocolet Candy", 3.95m },
-                    { 3, 1, " Lorem ipsum dolor sit amet, consectetur adiposcing elit, sed do eiusmod tempor...", "\\Images\\thumbnails\\chocolateCandy2-small.jpg", "\\Images\\chocolateCandy2.jpg", true, true, "Assorted Chocolet Candy", 2.95m },
-                    { 4, 2, " Lorem ipsum dolor sit amet, consectetur adiposcing elit, sed do eiusmod tempor...", "\\Images\\thumbnails\\FruitCandy-small.jpg", "\\Images\\FruitCandy.jpg", true, true, "Assorted Fruit Candy", 6.95m },
-                    { 5, 2, " Lorem ipsum dolor sit amet, consectetur adiposcing elit, sed do eiusmod tempor...", "\\Images\\thumbnails\\fruitCandy2-small.jpg", "\\Images\\fruitCandy2.jpg", true, false, "Assorted Fruit Candy", 3.95m },
-                    { 6, 2, " Lorem ipsum dolor sit amet, consectetur adiposcing elit, sed do eiusmod tempor...", "\\Images\\thumbnails\\fruitCandy3-small.jpg", "\\Images\\fruitCandy3.jpg", false, true, "Assorted Fruit Candy", 4.95m },
-                    { 7, 3, " Lorem ipsum dolor sit amet, consectetur adiposcing elit, sed do eiusmod tempor...", "\\Images\\thumbnails\\gummyCandy-small.jpg", "\\Images\\gummyCandy.jpg", true, false, "Assorted Gummy Candy", 4.95m },
-                    { 8, 3, " Lorem ipsum dolor sit amet, consectetur adiposcing elit, sed do eiusmod tempor...", "\\Images\\thumbnails\\gummyCandy2-small.jpg", "\\Images\\gummyCandy2.jpg", true, true, "Assorted Gummy Candy", 6.95m },
-                    { 9, 3, " Lorem ipsum dolor sit amet, consectetur adiposcing elit, sed do eiusmod tempor...", "\\Images\\thumbnails\\gummyCandy3-small.jpg", "\\Images\\gummyCandy3.jpg", true, true, "Assorted Gummy Candy", 4.95m },
-                    { 10, 4, " Lorem ipsum dolor sit amet, consectetur adiposcing elit, sed do eiusmod tempor...", "\\Images\\thumbnails\\halloweenCandy-small.jpg", "\\Images\\halloweenCandy.jpg", true, true, "Assorted Halloween Candy", 3.95m },
-                    { 11, 4, " Lorem ipsum dolor sit amet, consectetur adiposcing elit, sed do eiusmod tempor...", "\\Images\\thumbnails\\halloweenCandy2-small.jpg", "\\Images\\halloweenCandy2.jpg", false, true, "Assorted Halloween Candy", 5.95m },
-                    { 12, 4, " Lorem ipsum dolor sit amet, consectetur adiposcing elit, sed do eiusmod tempor...", "\\Images\\thumbnails\\halloweenCandy3-small.jpg", "\\Images\\halloweenCandy3.jpg", true, true, "Assorted Halloween Candy", 6.95m },
-                    { 13, 5, " Lorem ipsum dolor sit amet, consectetur adiposcing elit, sed do eiusmod tempor...", "\\Images\\thumbnails\\hardCandy-small.jpg", "\\Images\\hardCandy.jpg", true, false, "Assorted Hard Candy", 3.95m },
-                    { 14, 5, " Lorem ipsum dolor sit amet, consectetur adiposcing elit, sed do eiusmod tempor...", "\\Images\\thumbnails\\hardCandy2-small.jpg", "\\Images\\hardCandy2.jpg", false, true, "Assorted Hard Candy", 2.95m },
-                    { 15, 5, " Lorem ipsum dolor sit amet, consectetur adiposcing elit, sed do eiusmod tempor...", "\\Images\\thumbnails\\hardCandy3-small.jpg", "\\Images\\hardCandy3.jpg", true, false, "Assorted Hard Candy", 5.95m }
+                    { 1, 10, 1, " Lorem ipsum dolor sit amet, consectetur adiposcing elit, sed do eiusmod tempor...", "\\Images\\thumbnails\\chocolateCandy3-small.jpg", "\\Images\\chocolet.candy.jpg", "Assorted Chocolet Candy", 4.95m },
+                    { 2, 15, 1, " Lorem ipsum dolor sit amet, consectetur adiposcing elit, sed do eiusmod tempor...", "\\Images\\thumbnails\\chocolateCandy-small.jpg", "\\Images\\chocolateCandy.jpg", "Assorted Chocolet Candy", 3.95m },
+                    { 3, 10, 1, " Lorem ipsum dolor sit amet, consectetur adiposcing elit, sed do eiusmod tempor...", "\\Images\\thumbnails\\chocolateCandy2-small.jpg", "\\Images\\chocolateCandy2.jpg", "Assorted Chocolet Candy", 2.95m },
+                    { 4, 20, 2, " Lorem ipsum dolor sit amet, consectetur adiposcing elit, sed do eiusmod tempor...", "\\Images\\thumbnails\\FruitCandy-small.jpg", "\\Images\\FruitCandy.jpg", "Assorted Fruit Candy", 6.95m },
+                    { 5, 20, 2, " Lorem ipsum dolor sit amet, consectetur adiposcing elit, sed do eiusmod tempor...", "\\Images\\thumbnails\\fruitCandy2-small.jpg", "\\Images\\fruitCandy2.jpg", "Assorted Fruit Candy", 3.95m },
+                    { 6, 25, 2, " Lorem ipsum dolor sit amet, consectetur adiposcing elit, sed do eiusmod tempor...", "\\Images\\thumbnails\\fruitCandy3-small.jpg", "\\Images\\fruitCandy3.jpg", "Assorted Fruit Candy", 4.95m },
+                    { 7, 25, 3, " Lorem ipsum dolor sit amet, consectetur adiposcing elit, sed do eiusmod tempor...", "\\Images\\thumbnails\\gummyCandy-small.jpg", "\\Images\\gummyCandy.jpg", "Assorted Gummy Candy", 4.95m },
+                    { 8, 8, 3, " Lorem ipsum dolor sit amet, consectetur adiposcing elit, sed do eiusmod tempor...", "\\Images\\thumbnails\\gummyCandy2-small.jpg", "\\Images\\gummyCandy2.jpg", "Assorted Gummy Candy", 6.95m },
+                    { 9, 30, 3, " Lorem ipsum dolor sit amet, consectetur adiposcing elit, sed do eiusmod tempor...", "\\Images\\thumbnails\\gummyCandy3-small.jpg", "\\Images\\gummyCandy3.jpg", "Assorted Gummy Candy", 4.95m },
+                    { 10, 0, 4, " Lorem ipsum dolor sit amet, consectetur adiposcing elit, sed do eiusmod tempor...", "\\Images\\thumbnails\\halloweenCandy-small.jpg", "\\Images\\halloweenCandy.jpg", "Assorted Halloween Candy", 3.95m },
+                    { 11, 0, 4, " Lorem ipsum dolor sit amet, consectetur adiposcing elit, sed do eiusmod tempor...", "\\Images\\thumbnails\\halloweenCandy2-small.jpg", "\\Images\\halloweenCandy2.jpg", "Assorted Halloween Candy", 5.95m },
+                    { 12, 7, 4, " Lorem ipsum dolor sit amet, consectetur adiposcing elit, sed do eiusmod tempor...", "\\Images\\thumbnails\\halloweenCandy3-small.jpg", "\\Images\\halloweenCandy3.jpg", "Assorted Halloween Candy", 6.95m },
+                    { 13, 150, 5, " Lorem ipsum dolor sit amet, consectetur adiposcing elit, sed do eiusmod tempor...", "\\Images\\thumbnails\\hardCandy-small.jpg", "\\Images\\hardCandy.jpg", "Assorted Hard Candy", 3.95m },
+                    { 14, 150, 5, " Lorem ipsum dolor sit amet, consectetur adiposcing elit, sed do eiusmod tempor...", "\\Images\\thumbnails\\hardCandy2-small.jpg", "\\Images\\hardCandy2.jpg", "Assorted Hard Candy", 2.95m },
+                    { 15, 114, 5, " Lorem ipsum dolor sit amet, consectetur adiposcing elit, sed do eiusmod tempor...", "\\Images\\thumbnails\\hardCandy3-small.jpg", "\\Images\\hardCandy3.jpg", "Assorted Hard Candy", 5.95m }
                 });
 
             migrationBuilder.InsertData(
@@ -431,6 +473,16 @@ namespace candyshop_project.Migrations
                 column: "CategoryId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Discount_CampaignId",
+                table: "Discount",
+                column: "CampaignId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Discount_CandyId",
+                table: "Discount",
+                column: "CandyId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_OrderDetails_CandyId",
                 table: "OrderDetails",
                 column: "CandyId");
@@ -464,6 +516,9 @@ namespace candyshop_project.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
+                name: "Discount");
+
+            migrationBuilder.DropTable(
                 name: "OrderDetails");
 
             migrationBuilder.DropTable(
@@ -474,6 +529,9 @@ namespace candyshop_project.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
+
+            migrationBuilder.DropTable(
+                name: "Campaign");
 
             migrationBuilder.DropTable(
                 name: "Orders");

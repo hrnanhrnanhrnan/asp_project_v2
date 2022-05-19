@@ -6,7 +6,11 @@ namespace Candyshop.Models
     {
         public DateTime Date { get; set; }
 
-        public int ProductAmount { get; set; }
+        public decimal Amount { get; set; }
+
+        public string State { get; set; }
+
+        public string City { get; set; }
 
     }
 }

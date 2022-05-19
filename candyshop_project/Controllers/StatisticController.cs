@@ -17,7 +17,10 @@ namespace Candyshop.Controllers
 
         public ViewResult Index()
         {
-            ViewBag.DataPoints = JsonConvert.SerializeObject(_orderRepository.ChartData());
+            ViewBag.DataPointsColumn = JsonConvert.SerializeObject(_orderRepository.AmountPerDayChartData());
+            ViewBag.DataPointsState= JsonConvert.SerializeObject(_orderRepository.StateData());
+            ViewBag.DataPointsCity= JsonConvert.SerializeObject(_orderRepository.CityData());
+            ViewBag.DataPointsRevenue= JsonConvert.SerializeObject(_orderRepository.RevenuePerDayChartData());
 
             return View();
         }

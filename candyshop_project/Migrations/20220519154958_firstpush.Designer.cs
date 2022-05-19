@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace candyshop_project.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20220519132904_campaign")]
-    partial class campaign
+    [Migration("20220519154958_firstpush")]
+    partial class firstpush
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -49,6 +49,9 @@ namespace candyshop_project.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int>("AmountInStock")
+                        .HasColumnType("int");
+
                     b.Property<int>("CategoryId")
                         .HasColumnType("int");
 
@@ -60,9 +63,6 @@ namespace candyshop_project.Migrations
 
                     b.Property<string>("ImageUrl")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("IsInStock")
-                        .HasColumnType("bit");
 
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
@@ -80,165 +80,165 @@ namespace candyshop_project.Migrations
                         new
                         {
                             CandyId = 1,
+                            AmountInStock = 10,
                             CategoryId = 1,
                             Description = " Lorem ipsum dolor sit amet, consectetur adiposcing elit, sed do eiusmod tempor...",
                             ImageThumbnailUrl = "\\Images\\thumbnails\\chocolateCandy3-small.jpg",
                             ImageUrl = "\\Images\\chocolet.candy.jpg",
-                            IsInStock = true,
                             Name = "Assorted Chocolet Candy",
                             Price = 4.95m
                         },
                         new
                         {
                             CandyId = 2,
+                            AmountInStock = 15,
                             CategoryId = 1,
                             Description = " Lorem ipsum dolor sit amet, consectetur adiposcing elit, sed do eiusmod tempor...",
                             ImageThumbnailUrl = "\\Images\\thumbnails\\chocolateCandy-small.jpg",
                             ImageUrl = "\\Images\\chocolateCandy.jpg",
-                            IsInStock = true,
                             Name = "Assorted Chocolet Candy",
                             Price = 3.95m
                         },
                         new
                         {
                             CandyId = 3,
+                            AmountInStock = 10,
                             CategoryId = 1,
                             Description = " Lorem ipsum dolor sit amet, consectetur adiposcing elit, sed do eiusmod tempor...",
                             ImageThumbnailUrl = "\\Images\\thumbnails\\chocolateCandy2-small.jpg",
                             ImageUrl = "\\Images\\chocolateCandy2.jpg",
-                            IsInStock = true,
                             Name = "Assorted Chocolet Candy",
                             Price = 2.95m
                         },
                         new
                         {
                             CandyId = 4,
+                            AmountInStock = 20,
                             CategoryId = 2,
                             Description = " Lorem ipsum dolor sit amet, consectetur adiposcing elit, sed do eiusmod tempor...",
                             ImageThumbnailUrl = "\\Images\\thumbnails\\FruitCandy-small.jpg",
                             ImageUrl = "\\Images\\FruitCandy.jpg",
-                            IsInStock = true,
                             Name = "Assorted Fruit Candy",
                             Price = 6.95m
                         },
                         new
                         {
                             CandyId = 5,
+                            AmountInStock = 20,
                             CategoryId = 2,
                             Description = " Lorem ipsum dolor sit amet, consectetur adiposcing elit, sed do eiusmod tempor...",
                             ImageThumbnailUrl = "\\Images\\thumbnails\\fruitCandy2-small.jpg",
                             ImageUrl = "\\Images\\fruitCandy2.jpg",
-                            IsInStock = true,
                             Name = "Assorted Fruit Candy",
                             Price = 3.95m
                         },
                         new
                         {
                             CandyId = 6,
+                            AmountInStock = 25,
                             CategoryId = 2,
                             Description = " Lorem ipsum dolor sit amet, consectetur adiposcing elit, sed do eiusmod tempor...",
                             ImageThumbnailUrl = "\\Images\\thumbnails\\fruitCandy3-small.jpg",
                             ImageUrl = "\\Images\\fruitCandy3.jpg",
-                            IsInStock = false,
                             Name = "Assorted Fruit Candy",
                             Price = 4.95m
                         },
                         new
                         {
                             CandyId = 7,
+                            AmountInStock = 25,
                             CategoryId = 3,
                             Description = " Lorem ipsum dolor sit amet, consectetur adiposcing elit, sed do eiusmod tempor...",
                             ImageThumbnailUrl = "\\Images\\thumbnails\\gummyCandy-small.jpg",
                             ImageUrl = "\\Images\\gummyCandy.jpg",
-                            IsInStock = true,
                             Name = "Assorted Gummy Candy",
                             Price = 4.95m
                         },
                         new
                         {
                             CandyId = 8,
+                            AmountInStock = 8,
                             CategoryId = 3,
                             Description = " Lorem ipsum dolor sit amet, consectetur adiposcing elit, sed do eiusmod tempor...",
                             ImageThumbnailUrl = "\\Images\\thumbnails\\gummyCandy2-small.jpg",
                             ImageUrl = "\\Images\\gummyCandy2.jpg",
-                            IsInStock = true,
                             Name = "Assorted Gummy Candy",
                             Price = 6.95m
                         },
                         new
                         {
                             CandyId = 9,
+                            AmountInStock = 30,
                             CategoryId = 3,
                             Description = " Lorem ipsum dolor sit amet, consectetur adiposcing elit, sed do eiusmod tempor...",
                             ImageThumbnailUrl = "\\Images\\thumbnails\\gummyCandy3-small.jpg",
                             ImageUrl = "\\Images\\gummyCandy3.jpg",
-                            IsInStock = true,
                             Name = "Assorted Gummy Candy",
                             Price = 4.95m
                         },
                         new
                         {
                             CandyId = 10,
+                            AmountInStock = 0,
                             CategoryId = 4,
                             Description = " Lorem ipsum dolor sit amet, consectetur adiposcing elit, sed do eiusmod tempor...",
                             ImageThumbnailUrl = "\\Images\\thumbnails\\halloweenCandy-small.jpg",
                             ImageUrl = "\\Images\\halloweenCandy.jpg",
-                            IsInStock = true,
                             Name = "Assorted Halloween Candy",
                             Price = 3.95m
                         },
                         new
                         {
                             CandyId = 11,
+                            AmountInStock = 0,
                             CategoryId = 4,
                             Description = " Lorem ipsum dolor sit amet, consectetur adiposcing elit, sed do eiusmod tempor...",
                             ImageThumbnailUrl = "\\Images\\thumbnails\\halloweenCandy2-small.jpg",
                             ImageUrl = "\\Images\\halloweenCandy2.jpg",
-                            IsInStock = false,
                             Name = "Assorted Halloween Candy",
                             Price = 5.95m
                         },
                         new
                         {
                             CandyId = 12,
+                            AmountInStock = 7,
                             CategoryId = 4,
                             Description = " Lorem ipsum dolor sit amet, consectetur adiposcing elit, sed do eiusmod tempor...",
                             ImageThumbnailUrl = "\\Images\\thumbnails\\halloweenCandy3-small.jpg",
                             ImageUrl = "\\Images\\halloweenCandy3.jpg",
-                            IsInStock = true,
                             Name = "Assorted Halloween Candy",
                             Price = 6.95m
                         },
                         new
                         {
                             CandyId = 13,
+                            AmountInStock = 150,
                             CategoryId = 5,
                             Description = " Lorem ipsum dolor sit amet, consectetur adiposcing elit, sed do eiusmod tempor...",
                             ImageThumbnailUrl = "\\Images\\thumbnails\\hardCandy-small.jpg",
                             ImageUrl = "\\Images\\hardCandy.jpg",
-                            IsInStock = true,
                             Name = "Assorted Hard Candy",
                             Price = 3.95m
                         },
                         new
                         {
                             CandyId = 14,
+                            AmountInStock = 150,
                             CategoryId = 5,
                             Description = " Lorem ipsum dolor sit amet, consectetur adiposcing elit, sed do eiusmod tempor...",
                             ImageThumbnailUrl = "\\Images\\thumbnails\\hardCandy2-small.jpg",
                             ImageUrl = "\\Images\\hardCandy2.jpg",
-                            IsInStock = false,
                             Name = "Assorted Hard Candy",
                             Price = 2.95m
                         },
                         new
                         {
                             CandyId = 15,
+                            AmountInStock = 114,
                             CategoryId = 5,
                             Description = " Lorem ipsum dolor sit amet, consectetur adiposcing elit, sed do eiusmod tempor...",
                             ImageThumbnailUrl = "\\Images\\thumbnails\\hardCandy3-small.jpg",
                             ImageUrl = "\\Images\\hardCandy3.jpg",
-                            IsInStock = true,
                             Name = "Assorted Hard Candy",
                             Price = 5.95m
                         });
@@ -1040,7 +1040,7 @@ namespace candyshop_project.Migrations
                         new
                         {
                             Id = "1",
-                            ConcurrencyStamp = "f2a2bed8-6d1e-41be-92b1-f8a26be9b96c",
+                            ConcurrencyStamp = "e2bea85a-261c-47d9-ba4c-757c8a7059c6",
                             Name = "Admin",
                             NormalizedName = "Admin"
                         });
@@ -1139,15 +1139,15 @@ namespace candyshop_project.Migrations
                         {
                             Id = "1",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "71ceeacf-9ee9-4ebc-8bd5-a457d2f9a80a",
+                            ConcurrencyStamp = "6caa1f71-4f0f-455b-8098-763ba54b4a83",
                             Email = "admin@admin.se",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@ADMIN.SE",
                             NormalizedUserName = "ADMIN@ADMIN.SE",
-                            PasswordHash = "AQAAAAEAACcQAAAAEG4xO3Fyv7EH8HcAC/EGSd4yLX1u/8peNBlAjKZVzOQ5/uEqETZDfjdSjJTHUmGgcQ==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEBtI4D3zY8s344GG2msXpF2ZD774Xpfo4CFnKiTx3/Q8ma7WK3FJrj6abrjZCngZsA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "564ab2a6-7674-46be-ba27-4a8345e46b7c",
+                            SecurityStamp = "ab54430b-a0e0-4b5d-882c-f5e98aabdd4f",
                             TwoFactorEnabled = false,
                             UserName = "admin@admin.se"
                         });
