@@ -14,7 +14,7 @@ namespace Candyshop.Models
         public string ImageUrl { get; set; }
         public string ImageThumbnailUrl { get; set; }
         public bool IsOnSale => Discounts.Any(d => d.Campaign.End > DateTime.Now && d.Campaign.Start < DateTime.Now);
-        public bool IsInStock { get; set; }
+        public int AmountInStock { get; set; }
         public int CategoryId { get; set; }
         public Category Category { get; set; }
         public List<Discount> Discounts { get; set; }
@@ -32,5 +32,7 @@ namespace Candyshop.Models
             }
             return best;
         }
+
+        public bool IsInStock() => AmountInStock > 0;
     }
 }
