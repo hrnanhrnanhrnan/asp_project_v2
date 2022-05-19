@@ -19,7 +19,6 @@ namespace Candyshop.Controllers
             _categoryRepository = categoryRepository;
         }
 
-        //Freddy wuz her
         public ViewResult List(string category)
         {
              
