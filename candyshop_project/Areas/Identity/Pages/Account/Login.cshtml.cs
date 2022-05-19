@@ -85,6 +85,13 @@ namespace Candyshop.Areas.Identity.Pages.Account
                 var result = await _signInManager.PasswordSignInAsync(Input.Email, Input.Password, Input.RememberMe, lockoutOnFailure: true);
                 if (result.Succeeded)
                 {
+                    //very very very safe method
+                    if (ModelState.Values.Select(u => u.RawValue).ToList()[0].ToString().ToLower() == "admin@admin.se")
+                    {
+                        _logger.LogInformation("Admin logged in.");
+                        return RedirectToAction("Index", "Admin");
+                    }
+
                     _logger.LogInformation("User logged in.");
                     return LocalRedirect(returnUrl);
                 }
