@@ -7,7 +7,7 @@ namespace Candyshop.Models
 {
     public class Candy
     {
-        public int CandyId { get; set; }
+        public int CandyId { get; set; } //Hoppas ni får virus.
         public string Name { get; set; }
         public string Description { get; set; }
         public decimal Price { get; set; }
