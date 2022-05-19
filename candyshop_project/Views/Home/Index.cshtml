@@ -6,6 +6,6 @@
 <div class="row">
     @foreach(var candy in Model.CandyOnSale)
     {
-        <partial name="_candyCard" model="candy" />
+        <partial name="_candyCard" model="new CandyCardViewModel() { Candy = candy, BestDiscount = candy.FindBestDiscount(DateTime.Now) }" />
     }
 </div>

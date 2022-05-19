@@ -18,7 +18,7 @@ namespace Candyshop.Models
         {
             get
             {
-                return _appDbContext.Candies.Include(c => c.Category);
+                return _appDbContext.Candies.Include(c => c.Category).Include(c => c.Discounts).ThenInclude(d => d.Campaign);
             }
 
         }

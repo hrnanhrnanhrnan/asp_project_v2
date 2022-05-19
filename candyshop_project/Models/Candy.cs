@@ -18,5 +18,19 @@ namespace Candyshop.Models
         public int CategoryId { get; set; }
         public Category Category { get; set; }
         public List<Discount> Discounts { get; set; }
+
+        public Discount FindBestDiscount(DateTime date)
+        {
+            Discount best = null;
+            foreach (var discount in Discounts)
+            {
+                if (discount.Campaign.End > date && discount.Campaign.Start < date)
+                {
+                    if (best is null || best.PriceWithDiscount > discount.PriceWithDiscount)
+                        best = discount;
+                }
+            }
+            return best;
+        }
     }
 }
