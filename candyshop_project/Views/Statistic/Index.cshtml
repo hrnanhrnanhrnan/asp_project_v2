@@ -11,6 +11,7 @@ window.onload = function () {
         dataPoints.push({x: new Date(result[i].Date), y:result[i].ProductAmount});
     }
     console.log(result);
+
 	console.log(dataPoints);
 var chart = new CanvasJS.Chart("chartContainer", {
 	animationEnabled: true,

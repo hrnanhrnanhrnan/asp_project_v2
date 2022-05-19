@@ -41,7 +41,7 @@ namespace Candyshop.Models
 
         public List<ChartData> ChartData()
         {
-            var res = _appDbContext.Orders.GroupBy(x => x.OrderPlaced)
+            var res = _appDbContext.Orders.GroupBy(x => x.OrderPlaced.Date)
                 .Select(group => new ChartData
                 {
                     Date= group.Key.Date,
