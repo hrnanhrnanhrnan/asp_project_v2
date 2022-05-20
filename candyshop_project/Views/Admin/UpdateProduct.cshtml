@@ -1,7 +1,70 @@
-﻿<div>
+﻿@model Candy
+
+<div>
     <h2>Welcome to update page</h2>
 </div>
 
-<div>
-    <a class="btn btn-primary" asp-controller="Admin" asp-action="Index">Back</a>
-</div>
+<form method="post"  asp-action="UpdateProduct">
+    <div class="border p-3">
+        <input hidden asp-for="CandyId" />
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="form-group row">
+            <h2 class="text-info pl-3">Update Product</h2>
+        </div>
+        <div class="row">
+            <div class="col-8">
+                <div class="form-group row">
+                    <div class="col-4">
+                        <label asp-for="Name"></label>
+                    </div>
+                    <div class="col-8">
+                        <input asp-for="Name" placeholder="@Model.Name" class="form-control" />
+                        <span asp-validation-for="Name" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-4">
+                        <label asp-for="Description"></label>
+                    </div>
+                    <div class="col-8">
+                        <input asp-for="Description" placeholder="@Model.Description" class="form-control" />
+                        <span asp-validation-for="Description" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-4">
+                        <label asp-for="Price"></label>
+                    </div>
+                    <div class="col-8">
+                        <input asp-for="Price" placeholder="@Model.Price" class="form-control" />
+                        <span asp-validation-for="Price" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-4">
+                        <label asp-for="AmountInStock"></label>
+                    </div>
+                    <div class="col-8">
+                        <input asp-for="AmountInStock" placeholder="@Model.AmountInStock" class="form-control" />
+                        <span asp-validation-for="Price" class="text-danger"></span>
+                    </div>
+                </div>
+
+                @*<div class="form-group row">
+                    <div class="col-8">
+                        <select id="Select1" asp-for="CategoryId" asp-items="@(new SelectList(Model.Categories, nameof(Candy.CategoryId), nameof(Candy.Category.CategoryName)))">
+                        </select>
+                    </div>
+                </div>*@
+            </div>
+        </div>
+
+        <div class="col-6">
+            <button type="submit" class="btn btn-info text-left">Save Changes</button>
+            <a class="btn btn-primary" asp-controller="Admin" asp-action="ListOfCandies">Back</a>
+        </div>
+    </div>
+</form>

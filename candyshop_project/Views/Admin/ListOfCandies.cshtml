@@ -1,0 +1,30 @@
+﻿@model IEnumerable<Candy>
+
+@foreach (var candy in Model)
+{
+    <div class="col-sm-4 col-lg-4 col-md-4">
+        <div class="thumbnail">
+            <img src="@candy.ImageThumbnailUrl" alt="imge for candy" />
+            <div class="caption">
+                <h3>@candy.Name</h3>
+                <p>@candy.Description</p>
+            </div>
+            <div class="addToCart">
+                <p class="button">
+                    <a class="btn btn-primary"
+                       asp-controller="Admin"
+                       asp-action="UpdateProduct"
+                       asp-route-Id="@candy.CandyId">Update Product</a>
+                </p>
+
+                <p id="@candy.CandyId" onclick="" class="button delete-btn">
+                    <a class="btn btn-primary"
+                       @*asp-controller="Admin"
+                       asp-action="UpdateProduct"
+                       asp-route-Id="@candy.CandyId"*@>Delete Product</a>
+                </p>
+
+            </div>
+        </div>
+    </div>
+}

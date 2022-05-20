@@ -14,7 +14,7 @@ namespace Candyshop.Models
         {
             _appDbContext = appDbContext;
         }
-        public IEnumerable<Candy> GetAllCandy 
+        public IEnumerable<Candy> GetAllCandy
         {
             get
             {
@@ -23,7 +23,7 @@ namespace Candyshop.Models
 
         }
 
-        public IEnumerable<Candy> GetCandyOnSale 
+        public IEnumerable<Candy> GetCandyOnSale
         {
             get
             {
@@ -45,7 +45,32 @@ namespace Candyshop.Models
 
         public Candy GetCandyById(int candyId)
         {
-            return _appDbContext.Candies.FirstOrDefault(c => c.CandyId == candyId);
+            return _appDbContext.Candies.Include(c => c.Category).FirstOrDefault(c => c.CandyId == candyId);
+        }
+
+        public Candy UpdateCandy(Candy candy)
+        {
+            var candyFromDb = _appDbContext.Candies.Include(c => c.Category).FirstOrDefault(c => c.CandyId == candy.CandyId);
+            if (candyFromDb != null)
+            {
+                candyFromDb.AmountInStock = candy.AmountInStock;
+                candyFromDb.Description = candy.Description;
+                candyFromDb.Name = candy.Name;
+                candyFromDb.Price = candy.Price;
+                _appDbContext.SaveChanges();
+                return candyFromDb;
+            }
+            return candy;
+        }
+
+        public void DeleteCandy(int id)
+        {
+            var candy = _appDbContext.Candies.FirstOrDefault(c => c.CandyId == id);
+            if (candy != null)
+            {
+                _appDbContext.Candies.Remove(candy);
+                _appDbContext.SaveChanges();
+            }
         }
     }
 }

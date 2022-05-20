@@ -35,7 +35,7 @@ namespace Candyshop.Controllers
                 return RedirectToAction("Details", "Candy", new { id = candy.CandyId});
             }
 
-            return View();
+            return View(candyVM);
         }
 
         [HttpGet]
@@ -47,9 +47,36 @@ namespace Candyshop.Controllers
             return View(vm);
         }
 
-        public IActionResult UpdateProduct()
+        public IActionResult ListOfCandies()
         {
-            return View();
+            return View(_candyRepo.GetAllCandy);
+        }
+
+        [HttpGet]
+        public IActionResult UpdateProduct(int id)
+        {
+            var candy = _candyRepo.GetCandyById(id);
+            if (candy != null)
+            {
+                return View(candy);
+            }
+
+            //return not found error view
+            Response.StatusCode = 404;
+            return View("_ProductNotFound", id);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult UpdateProduct(Candy model)
+        {
+            if (ModelState.IsValid)
+            {
+                _candyRepo.UpdateCandy(model);
+                return RedirectToAction("ListOfCandies");
+            }
+
+            return View(model);
         }
 
         public IActionResult DeleteProduct()

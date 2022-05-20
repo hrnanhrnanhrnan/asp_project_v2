@@ -11,5 +11,7 @@ namespace Candyshop.Models
         IEnumerable<Candy> GetCandyOnSale { get; }
         Candy GetCandyById(int candyId);
         Candy CreateCandy(Candy candy);
+        Candy UpdateCandy(Candy candy);
+        void DeleteCandy(int id);
     }
 }
