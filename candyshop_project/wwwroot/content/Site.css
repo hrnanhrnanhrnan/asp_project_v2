@@ -4,7 +4,20 @@
     background-repeat: repeat;
     font-family: 'Source Sans Pro', sans-serif;
 }
+.container_sale {
+    display: flex;
+}
 
+h1,h2{
+    font-weight:bold;
+}
+.fixed {
+    margin-right:5%;
+}
+
+.flex-item {
+    flex-grow: 1;
+}
 
 .slide-image {
     width: 100%;
