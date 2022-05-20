@@ -71,9 +71,16 @@ namespace Candyshop.Controllers
             return RedirectToAction("Edit", new { id = discount.CampaignId });
         }
 
-        public IActionResult EditDiscount(Discount discount)
+        public IActionResult EditDiscount(int id)
         {
+            var discount = _discountRepository.GetById(id);
             return View(discount);
+        }
+
+        public IActionResult SubmitEditDiscount(Discount discount)
+        {
+            _discountRepository.UpdateDiscount(discount);
+            return RedirectToAction("Edit", new { id = discount.CampaignId });
         }
 
         public IActionResult RemoveDiscount(int id)

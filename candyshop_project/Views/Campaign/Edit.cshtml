@@ -6,37 +6,8 @@
 
 <h2>Edit</h2>
 
-<h4>Campaign</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="SubmitEditCampaign">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="Campaign.ID" />
-            <div class="form-group">
-                <label asp-for="Campaign.Name" class="control-label"></label>
-                <input asp-for="Campaign.Name" class="form-control" />
-                <span asp-validation-for="Campaign.Name" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Campaign.Start" class="control-label"></label>
-                <input asp-for="Campaign.Start" class="form-control" />
-                <span asp-validation-for="Campaign.Start" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Campaign.Days" class="control-label"></label>
-                <input asp-for="Campaign.Days" class="form-control" />
-                <span asp-validation-for="Campaign.Days" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-default" />
-            </div>
-        </form>
-    </div>
-</div>
-
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index">Back to Campaigns</a>
 </div>
 
 <h2>Discounts</h2>
@@ -67,7 +38,7 @@
                         -@(discount.IsFlatAmount ? discount.Amount.ToString() : $"{discount.Amount}%")
                     </td>
                     <td>
-                        <a asp-action="EditDiscount" asp-route-discount="@discount">Edit</a> |
+                        <a asp-action="EditDiscount" asp-route-id="@discount.ID">Edit</a> |
                         <a asp-action="RemoveDiscount" asp-route-id="@discount.ID">Remove</a>
                     </td>
                 }
@@ -85,6 +56,39 @@
         }
     </tbody>
 </table>
+<h4>Campaign</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="SubmitEditCampaign">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Campaign.ID" />
+            <div class="form-group">
+                <label asp-for="Campaign.Name" class="control-label"></label>
+                <input asp-for="Campaign.Name" class="form-control" />
+                <span asp-validation-for="Campaign.Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Campaign.Start" class="control-label"></label>
+                <input asp-for="Campaign.Start" class="form-control" />
+                <span asp-validation-for="Campaign.Start" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Campaign.Days" class="control-label"></label>
+                <input asp-for="Campaign.Days" class="form-control" />
+                <span asp-validation-for="Campaign.Days" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+
+
+<div>
+    <a asp-action="Index">Back to Campaigns</a>
+</div>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
