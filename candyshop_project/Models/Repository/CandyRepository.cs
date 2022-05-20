@@ -45,7 +45,7 @@ namespace Candyshop.Models
 
         public Candy GetCandyById(int candyId)
         {
-            return _appDbContext.Candies.FirstOrDefault(c => c.CandyId == candyId);
+            return _appDbContext.Candies.Include(c => c.Discounts).ThenInclude(d => d.Campaign).FirstOrDefault(c => c.CandyId == candyId);
         }
     }
 }

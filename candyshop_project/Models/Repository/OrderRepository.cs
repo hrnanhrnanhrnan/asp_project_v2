@@ -26,10 +26,11 @@ namespace Candyshop.Models
 
             foreach(var shoppingCartItem in shoppingCartItems)
             {
+                var bestDiscount = shoppingCartItem.Candy.FindBestDiscount(order.OrderPlaced);
                 var orderDetail = new OrderDetail
                 {
                     Amount = shoppingCartItem.Amount,
-                    Price = shoppingCartItem.Candy.Price,
+                    Price = bestDiscount?.PriceWithDiscount ?? shoppingCartItem.Candy.Price,
                     CandyId = shoppingCartItem.Candy.CandyId,
                     OrderId = order.OrderId
                 };
