@@ -15,5 +15,7 @@ namespace Candyshop.Models
         ChartData StateData();
 
         List<ChartData> TopLoyalCustomersData();
+        Order GetOrderById(int id);
+        IEnumerable<Order> GetAllOrders();
     }
 }

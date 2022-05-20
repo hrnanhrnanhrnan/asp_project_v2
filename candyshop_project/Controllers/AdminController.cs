@@ -1,28 +1,81 @@
 ﻿using Candyshop.Models;
+using Candyshop.Models.Repository;
 using candyshop_project.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Threading.Tasks;
 
 namespace Candyshop.Controllers
 {
+    
     [Authorize(Roles = "Admin")]
     public class AdminController : Controller
     {
+        private static string warehouseOrigin = "Barton County, Kansas, USA";
+
+        static HttpClient client;
         private readonly ICandyRepository _candyRepo;
         private readonly ICategoryRepositoty _categoryRepo;
-        public AdminController(ICandyRepository candyRepo, ICategoryRepositoty categoryRepo)
+        private readonly IOrderRepository _orderRepo;
+        private readonly IOrderDetailRepository _orderDetailRepo;
+        public AdminController(ICandyRepository candyRepo, ICategoryRepositoty categoryRepo, IOrderRepository orderRepo, IOrderDetailRepository orderDetailRepo)
         {
             _candyRepo = candyRepo;
             _categoryRepo = categoryRepo;
+            _orderRepo = orderRepo;
+            _orderDetailRepo = orderDetailRepo;
+            client = new HttpClient();
         }
 
         public IActionResult Index()
         {
             return View();
+        }
+
+        public IActionResult OrderLogs()
+        {
+            var orders = _orderRepo.GetAllOrders();
+            return View(orders);
+        }
+
+
+        public async Task<IActionResult> OrderLogDetails(int id)
+        {
+            var order = _orderRepo.GetOrderById(id);
+            if(order != null)
+            {
+                // reate new orderlogvm and set order prop from order found by id from orderlogs view,
+                // set candies prop from orderdetails table and set distance/duration props by fetching from api by sending in address from order city
+
+                    var orderLogViewModel = new OrderLogViewModel
+                    {
+                        Order = order,
+                        Candies = _orderDetailRepo.GetAllOrderDetails().Where(od => od.OrderId == order.OrderId).Select(c => c.Candy).ToList()
+                    };
+
+
+                HttpResponseMessage response = await client
+                    .GetAsync($"https://api.distancematrix.ai/maps/api/distancematrix/json?origins={warehouseOrigin}&destinations={order.City}&key=hmtTj0EEOYZoAZwm2rw8VN7lcoVIQ");
+
+                //to be dealt with next week
+                if (response.IsSuccessStatusCode)
+                {
+                    var data = await response.Content.ReadAsStringAsync();
+                    orderLogViewModel.Duration = "";
+                    orderLogViewModel.Distance = "";
+
+                }
+
+                return View(orderLogViewModel);
+            }
+
+            Response.StatusCode = 404;
+            return View("_ItemNotFound", id);
+
         }
 
         [HttpPost]
@@ -63,7 +116,7 @@ namespace Candyshop.Controllers
 
             //return not found error view
             Response.StatusCode = 404;
-            return View("_ProductNotFound", id);
+            return View("_ItemNotFound", id);
         }
 
         [HttpPost]

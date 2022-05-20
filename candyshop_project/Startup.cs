@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Candyshop.Models;
+using Candyshop.Models.Repository;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -39,6 +40,7 @@ namespace Candyshop
             services.AddScoped<IOrderRepository, OrderRepository>();
             services.AddScoped<ICampaignRepository, CampaignRepository>();
             services.AddScoped<IDiscountRepository, DiscountRepository>();
+            services.AddScoped<IOrderDetailRepository, OrderDetailRepository>();
 
 
 

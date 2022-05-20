@@ -1,0 +1,23 @@
+﻿@model IEnumerable<Order>
+
+    
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">OrderId</th>
+                    <th scope="col">Date</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                @foreach (var item in Model)
+                {
+                        <tr>
+                            <th scope="row"><a asp-action="OrderLogDetails" asp-route-id="@item.OrderId">@item.OrderId</a></th>
+                            <td>@item.OrderPlaced</td>
+                        </tr>
+                }
+
+            </tbody>
+        </table>

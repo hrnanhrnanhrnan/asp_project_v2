@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -92,6 +93,21 @@ namespace Candyshop.Models
 
             return data;
                 
+        }
+
+        public Order GetOrderById(int id)
+        {
+            var order = _appDbContext.Orders.FirstOrDefault(o => o.OrderId == id);
+            if(order != null)
+            {
+                return order;
+            }
+            return null;
+        }
+
+        public IEnumerable<Order> GetAllOrders()
+        {
+            return _appDbContext.Orders;
         }
     }
 }

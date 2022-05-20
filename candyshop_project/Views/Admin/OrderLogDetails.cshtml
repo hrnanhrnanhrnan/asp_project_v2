@@ -1,0 +1,17 @@
+﻿@model OrderLogViewModel
+
+<h1>OrderId: @Model.Order.OrderId</h1>
+<h4>Distance: @Model.Distance</h4>
+<h4>Duration: @Model.Duration</h4>
+<h4>Total: @Model.Order.OrderTotal</h4>
+
+<h1>Products</h1>
+@if (Model.Candies.Count > 0)
+{
+    foreach (var candy in Model.Candies)
+    {
+        <h4>@candy.Name</h4>
+    }
+}
+
+<a class="btn btn-primary" asp-controller="Admin" asp-action="OrderLogs">Back</a>
