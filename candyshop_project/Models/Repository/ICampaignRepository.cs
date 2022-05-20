@@ -22,11 +22,8 @@ namespace Candyshop.Models
         void DeleteCampaign(Campaign campaign);
         void CreateCampaign(Campaign campaign);
         void UpdateCampaign(Campaign campaign);
-        void CreateDiscount(Discount campaign);
-        void UpdateDiscount(Discount campaign);
-        void DeleteDiscount(Discount campaign);
-        Discount GetDiscountById(int id);
     }
+
     public class CampaignRepository : ICampaignRepository
     {
         private readonly AppDbContext _appDbContext;
@@ -66,25 +63,5 @@ namespace Candyshop.Models
             _appDbContext.Discount.RemoveRange(_appDbContext.Discount.Include(d => d.Campaign).Where(d => d.Campaign.ID == campaign.ID));
             _appDbContext.SaveChanges();
         }
-
-        public void CreateDiscount(Discount discount)
-        {
-            _appDbContext.Discount.Add(discount);
-            _appDbContext.SaveChanges();
-        }
-
-        public void UpdateDiscount(Discount discount)
-        {
-            _appDbContext.Discount.Update(discount);
-            _appDbContext.SaveChanges();
-        }
-
-        public void DeleteDiscount(Discount discount)
-        {
-            _appDbContext.Discount.Remove(discount);
-            _appDbContext.SaveChanges();
-        }
-
-        public Discount GetDiscountById(int id) => _appDbContext.Discount.FirstOrDefault(c => c.ID == id);
     }
 }

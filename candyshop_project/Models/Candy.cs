@@ -33,6 +33,8 @@ namespace Candyshop.Models
             return best;
         }
 
+        public decimal GetPriceWithBestDiscount(DateTime date) => FindBestDiscount(date)?.PriceWithDiscount ?? Price;
+
         public bool IsInStock() => AmountInStock > 0;
     }
 }

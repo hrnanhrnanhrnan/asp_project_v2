@@ -84,7 +84,9 @@ namespace Candyshop.Models
         {
             return ShoppingCartItems ?? (ShoppingCartItems = _appDbContext.ShoppingCartItems.Where
                                                              (c => c.ShoppingCartId == ShoppingCartId).Include
-                                                             (s => s.Candy).ToList());
+                                                             (s => s.Candy).ThenInclude
+                                                             (c => c.Discounts).ThenInclude
+                                                             (d => d.Campaign).ToList());
         }
 
         public void ClearCart()
@@ -98,8 +100,8 @@ namespace Candyshop.Models
         public decimal GetShoppingCartTotal()
         {
             var total = _appDbContext.ShoppingCartItems
-                .Where(c => c.ShoppingCartId == ShoppingCartId).Select
-                (c => c.Candy.Price * c.Amount).Sum();
+                .Where(c => c.ShoppingCartId == ShoppingCartId).ToArray().Select
+                (c => c.Candy.GetPriceWithBestDiscount(DateTime.Now) * c.Amount).Sum();
 
             return total;
         }

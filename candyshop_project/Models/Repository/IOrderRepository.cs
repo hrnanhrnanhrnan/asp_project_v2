@@ -13,6 +13,7 @@ namespace Candyshop.Models
         List<ChartData> RevenuePerDayChartData();
 
         ChartData StateData();
-        ChartData CityData();
+
+        List<ChartData> TopLoyalCustomersData();
     }
 }

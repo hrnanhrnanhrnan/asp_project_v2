@@ -26,10 +26,11 @@ namespace Candyshop.Models
 
             foreach(var shoppingCartItem in shoppingCartItems)
             {
+                var bestDiscount = shoppingCartItem.Candy.FindBestDiscount(order.OrderPlaced);
                 var orderDetail = new OrderDetail
                 {
                     Amount = shoppingCartItem.Amount,
-                    Price = shoppingCartItem.Candy.Price,
+                    Price = bestDiscount?.PriceWithDiscount ?? shoppingCartItem.Candy.Price,
                     CandyId = shoppingCartItem.Candy.CandyId,
                     OrderId = order.OrderId
                 };
@@ -64,18 +65,6 @@ namespace Candyshop.Models
             return data;
         }
 
-        public ChartData CityData()
-        {
-            var data = _appDbContext.Orders.GroupBy(x => x.City)
-                .Select(group => new ChartData
-                {
-                    City = group.Key,
-                    Amount = group.Sum(x=>x.OrderTotal),
-                }).OrderByDescending(x => x.Amount).First();
-
-            return data;
-        }
-
         public List<ChartData> RevenuePerDayChartData()
         {
             var data = _appDbContext.Orders.GroupBy(x => x.OrderPlaced.Date)
@@ -87,6 +76,22 @@ namespace Candyshop.Models
                 }).ToList();
 
             return data;
+        }
+
+        public List<ChartData> TopLoyalCustomersData()
+        {
+            var data = _appDbContext.Orders.GroupBy(x => new
+            {
+                x.FirstName,
+                x.LastName
+            }).Select(group => new ChartData
+            {
+                Name = group.Key.FirstName + " " + group.Key.LastName,
+                Amount = group.Sum(x => x.OrderTotal),
+            }).OrderByDescending(x => x.Amount).Take(3).ToList();
+
+            return data;
+                
         }
     }
 }
