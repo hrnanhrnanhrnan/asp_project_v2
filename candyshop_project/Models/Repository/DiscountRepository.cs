@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using Microsoft.EntityFrameworkCore;
+using System.Linq;
 
 namespace Candyshop.Models
 {
@@ -36,6 +37,6 @@ namespace Candyshop.Models
             _appDbContext.SaveChanges();
         }
 
-        public Discount GetById(int id) => _appDbContext.Discount.FirstOrDefault(c => c.ID == id);
+        public Discount GetById(int id) => _appDbContext.Discount.Include(d => d.Candy).FirstOrDefault(c => c.ID == id);
     }
 }

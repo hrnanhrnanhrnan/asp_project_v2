@@ -7,9 +7,9 @@ namespace Candyshop.Models
     public class Campaign
     {
         [Key] public int ID { get; set; }
-        public string Name { get; set; }
-        public DateTime Start { get; set; }
-        public int Days { get; set; }
+        public string Name { get; set; } = "Candy Campaign!";
+        public DateTime Start { get; set; } = DateTime.Now.Date + TimeSpan.FromDays(1);
+        public int Days { get; set; } = 7;
         public DateTime End => Start + TimeSpan.FromDays(Days);
         public List<Discount> Discounts { get; set; } = new List<Discount>();
     }
