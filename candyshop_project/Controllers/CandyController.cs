@@ -12,11 +12,13 @@ namespace Candyshop.Controllers
     {
         private readonly ICandyRepository _candyRepository;
         private readonly ICategoryRepositoty _categoryRepository;
+        private readonly IDiscountRepository _discountRepository;
 
-        public CandyController(ICandyRepository candyRepository, ICategoryRepositoty categoryRepository)
+        public CandyController(ICandyRepository candyRepository, ICategoryRepositoty categoryRepository, IDiscountRepository discountRepository)
         {
             _candyRepository = candyRepository;
             _categoryRepository = categoryRepository;
+            _discountRepository = discountRepository;
         }
 
         public ViewResult List(string category)
@@ -42,16 +44,21 @@ namespace Candyshop.Controllers
                 CurrentCategory = currentCategory });
         }
 
-        public IActionResult Details(int id)
+        public IActionResult Details(int id, int discountId)
         {
             var candy = _candyRepository.GetCandyById(id);
-            if(candy == null)
+            var discount = _discountRepository.GetById(id);
+            if (candy == null)
             {
                 return NotFound();
             }
-                
 
-            return View(candy);
+
+            return View(new CandyCardViewModel()
+            {
+                Candy = candy,
+                BestDiscount = discount,
+            });
 
             
         }

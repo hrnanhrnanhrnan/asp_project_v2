@@ -8,11 +8,13 @@ namespace Candyshop.Controllers
     {
         private readonly ICampaignRepository _campaignRepository;
         private readonly ICandyRepository _candyRepository;
+        private readonly IDiscountRepository _discountRepository;
 
-        public CampaignController(ICampaignRepository campaignRepository, ICandyRepository candyRepository)
+        public CampaignController(ICampaignRepository campaignRepository, ICandyRepository candyRepository, IDiscountRepository discountRepository)
         {
             _campaignRepository = campaignRepository;
             _candyRepository = candyRepository;
+            _discountRepository = discountRepository;
         }
 
         public IActionResult Index()
@@ -65,7 +67,7 @@ namespace Candyshop.Controllers
 
         public IActionResult AddDiscount(Discount discount)
         {
-            _campaignRepository.CreateDiscount(discount);
+            _discountRepository.CreateDiscount(discount);
             return RedirectToAction("Edit", new { id = discount.CampaignId });
         }
 
@@ -76,9 +78,9 @@ namespace Candyshop.Controllers
 
         public IActionResult RemoveDiscount(int id)
         {
-            var discount = _campaignRepository.GetDiscountById(id);
+            var discount = _discountRepository.GetById(id);
             int campaignID = discount.CampaignId;
-            _campaignRepository.DeleteDiscount(discount);
+            _discountRepository.DeleteDiscount(discount);
 
             return RedirectToAction("Edit", new { id = discount.CampaignId });
         }
