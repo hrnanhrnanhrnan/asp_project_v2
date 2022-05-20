@@ -11,40 +11,36 @@
         <small class="text-muted">| A statistical summary</small>
     </h1>
 
-    
-	<div class="container">
-    <div class="row">
-            <div class="col-md-auto">
-                <h3>Highest state sales</h3>
-                <div>
-                    <span>@Model.stateData.State</span>
-                    <span style="padding-left:3%">@Model.stateData.Amount$</span>
-                </div>
-
-            </div>
-            <div class="col-md-auto">
-                <h3>Top 3 loyal customer</h3>
-                <div>
-                    @foreach(var customer in Model.LoyalCustomerData)
-                    {
-                        <span>@Html.DisplayFor(x=>customer.Name)</span>
-                        <span style="padding-left:3%">@Html.DisplayFor(x=>customer.Amount)$</span>
-                        <br />
-                    }
-                </div>
-
-            </div>
+    <div class="container_sale">
+      <div class="fixed">
+        <h3>Highest state revenue</h3>
+        <div>
+            <span>@Model.stateData.State</span>
+            <span style="padding-left:3%">@Model.stateData.Amount$</span>
         </div>
+
+      </div>
+      <div class="flex-item">
+        <h3>Top 3 loyal customer</h3>
+        <div>
+            @foreach(var customer in Model.LoyalCustomerData)
+            {
+                <span>@Html.DisplayFor(x=>customer.Name)</span>
+                <span style="padding-left:3%">@Html.DisplayFor(x=>customer.Amount)$</span>
+                <br />
+            }
+        </div>
+
+      </div>
     </div>
+    
+
+
 
 
     <h2>Revenue summary</h2>
-    <div id="chartContainerColumn" style="height: 370px; width: 100%;"></div>
-    <br />
-    <br />
-    <br />
-    <br />
-    <div id="chartContainerLine" style="height: 370px; width: 100%;"></div>
+    <div id="chartContainerColumn" style="height: 370px; width: 100%;margin-top:6%"></div>
+    <div id="chartContainerLine" style="height: 370px; width: 100%;margin-top:10%"></div>
 	
 </body>
 <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
