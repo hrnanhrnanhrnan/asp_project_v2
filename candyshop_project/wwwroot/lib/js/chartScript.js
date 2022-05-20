@@ -30,15 +30,6 @@
 }
 
 
-function PerformanceIndicator(resultState,resultCity) {
-	$("#state").html(resultState.State);
-	$("#amountstate").html(Math.round(resultState.Amount) + "$");
-
-	$("#city").html(resultCity.City);
-	$("#amountcity").html(Math.round(resultCity.Amount) + "$");
-}
-
-
 function SaleRevenuePerDay(result) {
 	var dataPoints = [];
 	for (var i = 0; i < result.length; i++) {

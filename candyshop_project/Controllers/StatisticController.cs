@@ -1,4 +1,5 @@
 ﻿using Candyshop.Models;
+using candyshop_project.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System.Collections.Generic;
@@ -17,12 +18,15 @@ namespace Candyshop.Controllers
 
         public ViewResult Index()
         {
-            ViewBag.DataPointsColumn = JsonConvert.SerializeObject(_orderRepository.AmountPerDayChartData());
-            ViewBag.DataPointsState= JsonConvert.SerializeObject(_orderRepository.StateData());
-            ViewBag.DataPointsCity= JsonConvert.SerializeObject(_orderRepository.CityData());
+            ViewBag.DataPointsAmountPerDay = JsonConvert.SerializeObject(_orderRepository.AmountPerDayChartData());
             ViewBag.DataPointsRevenue= JsonConvert.SerializeObject(_orderRepository.RevenuePerDayChartData());
 
-            return View();
+            var model = new ChartDataViewModel();
+
+            model.LoyalCustomerData = _orderRepository.TopLoyalCustomersData();
+            model.stateData= _orderRepository.StateData();
+
+            return View(model);
         }
     }
 }
