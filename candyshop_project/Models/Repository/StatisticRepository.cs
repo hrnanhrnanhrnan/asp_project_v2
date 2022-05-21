@@ -75,7 +75,7 @@ namespace candyshop_project.Models.Repository
                 Name = x.Name,
                 Amount = x.AmountInStock,
                 Price = x.Price,
-            }).OrderByDescending(x=>x.Amount).ToList();
+            }).OrderByDescending(x=>x.Amount).Where(x=>x.Amount<=10).ToList();
             
 
             return data;

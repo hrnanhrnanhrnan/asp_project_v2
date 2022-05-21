@@ -52,14 +52,11 @@
             <tbody>
                 @foreach(var item in Model.InventoryData)
                 {
-                    @if (item.Amount <= 10)
-                    {
-                        <tr>
-                            <td> @item.Name </td>
-                            <td> @item.Price </td>
-                            <td> @item.Amount</td>
-                        </tr>
-                    }
+                    <tr>
+                        <td> @item.Name </td>
+                        <td> @item.Price </td>
+                        <td> @item.Amount</td>
+                    </tr>
                 }
             </tbody>
 
