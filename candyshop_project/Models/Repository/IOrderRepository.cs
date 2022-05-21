@@ -9,12 +9,7 @@ namespace Candyshop.Models
     {
         void CreatOrder(Order order);
 
-        List<ChartData> AmountPerDayChartData();
-        List<ChartData> RevenuePerDayChartData();
 
-        ChartData StateData();
-
-        List<ChartData> TopLoyalCustomersData();
         Order GetOrderById(int id);
         IEnumerable<Order> GetAllOrders();
     }
