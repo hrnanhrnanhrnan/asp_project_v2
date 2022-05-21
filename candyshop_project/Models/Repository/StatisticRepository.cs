@@ -14,10 +14,10 @@ namespace candyshop_project.Models.Repository
             _appDbContext = appDbContext;
         }
 
-        public List<ChartData> AmountPerDayChartData()
+        public List<StatisticalData> AmountPerDayChartData()
         {
             var data = _appDbContext.Orders.GroupBy(x => x.OrderPlaced.Date)
-                .Select(group => new ChartData
+                .Select(group => new StatisticalData
                 {
                     Date = group.Key.Date,
                     Amount = group.Count(),
@@ -27,10 +27,10 @@ namespace candyshop_project.Models.Repository
             return data;
         }
 
-        public ChartData StateData()
+        public StatisticalData StateData()
         {
             var data = _appDbContext.Orders.GroupBy(x => x.State)
-                .Select(group => new ChartData
+                .Select(group => new StatisticalData
                 {
                     State = group.Key,
                     Amount = group.Sum(x => x.OrderTotal),
@@ -39,10 +39,10 @@ namespace candyshop_project.Models.Repository
             return data;
         }
 
-        public List<ChartData> RevenuePerDayChartData()
+        public List<StatisticalData> RevenuePerDayChartData()
         {
             var data = _appDbContext.Orders.GroupBy(x => x.OrderPlaced.Date)
-                .Select(group => new ChartData
+                .Select(group => new StatisticalData
                 {
                     Date = group.Key.Date,
                     Amount = group.Sum(x => x.OrderTotal),
@@ -52,13 +52,13 @@ namespace candyshop_project.Models.Repository
             return data;
         }
 
-        public List<ChartData> TopLoyalCustomersData()
+        public List<StatisticalData> TopLoyalCustomersData()
         {
             var data = _appDbContext.Orders.GroupBy(x => new
             {
                 x.FirstName,
                 x.LastName
-            }).Select(group => new ChartData
+            }).Select(group => new StatisticalData
             {
                 Name = group.Key.FirstName + " " + group.Key.LastName,
                 Amount = group.Sum(x => x.OrderTotal),
@@ -68,7 +68,18 @@ namespace candyshop_project.Models.Repository
 
         }
 
+        public List<StatisticalData> InventoryData()
+        {
+            var data = _appDbContext.Candies.Select(x => new StatisticalData
+            {
+                Name = x.Name,
+                Amount = x.AmountInStock,
+                Price = x.Price,
+            }).OrderByDescending(x=>x.Amount).ToList();
+            
 
+            return data;
+        }
 
     }
 }

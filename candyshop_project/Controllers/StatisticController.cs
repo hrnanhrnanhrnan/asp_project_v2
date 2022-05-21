@@ -23,10 +23,11 @@ namespace Candyshop.Controllers
             ViewBag.DataPointsAmountPerDay = JsonConvert.SerializeObject(_statisticRepository.AmountPerDayChartData());
             ViewBag.DataPointsRevenue= JsonConvert.SerializeObject(_statisticRepository.RevenuePerDayChartData());
 
-            var model = new ChartDataViewModel();
+            var model = new StatisticalDataViewModel();
 
             model.LoyalCustomerData = _statisticRepository.TopLoyalCustomersData();
             model.stateData= _statisticRepository.StateData();
+            model.InventoryData= _statisticRepository.InventoryData();
 
             return View(model);
         }

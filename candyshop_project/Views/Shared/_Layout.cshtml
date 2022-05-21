@@ -69,7 +69,18 @@
             </div>
 
         </div>
+
+
         @RenderSection("Scripts", required:false)
+    </div>
+    <div class="footer-basic">
+            <footer>
+                <ul class="list-inline">
+                    <li><a asp-controller="Home" asp-action="Index">Home</a></li>
+                    <li><a asp-controller="Contact" asp-action="Index">Contact Us</a></li>
+                </ul>
+                <p class="copyright">Pineapple under sea © 2022</p>
+            </footer>
     </div>
 </body>
 </html>

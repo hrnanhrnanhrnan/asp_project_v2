@@ -2,7 +2,7 @@
 
 namespace Candyshop.Models
 {
-    public class ChartData
+    public class StatisticalData
     {
         public DateTime Date { get; set; }
 
@@ -12,5 +12,6 @@ namespace Candyshop.Models
 
         public string Name { get; set; }
 
+        public decimal Price { get; set; }
     }
 }

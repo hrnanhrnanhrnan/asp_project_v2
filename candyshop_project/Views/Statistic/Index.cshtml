@@ -1,4 +1,4 @@
-﻿@model candyshop_project.ViewModels.ChartDataViewModel;
+﻿@model candyshop_project.ViewModels.StatisticalDataViewModel;
 
 <!DOCTYPE HTML>
 <html>
@@ -33,14 +33,38 @@
 
       </div>
     </div>
-    
-
-
-
-
-    <h2>Revenue summary</h2>
+   
+    <h2>Revenue</h2>
     <div id="chartContainerColumn" style="height: 370px; width: 100%;margin-top:6%"></div>
     <div id="chartContainerLine" style="height: 370px; width: 100%;margin-top:10%"></div>
+
+
+    <h2>Inventory</h2>
+    <div>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Candy</th>
+                    <th>Price</th>
+                    <th>Amount left in stock</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach(var item in Model.InventoryData)
+                {
+                    @if (item.Amount <= 10)
+                    {
+                        <tr>
+                            <td> @item.Name </td>
+                            <td> @item.Price </td>
+                            <td> @item.Amount</td>
+                        </tr>
+                    }
+                }
+            </tbody>
+
+        </table>
+    </div>
 	
 </body>
 <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>

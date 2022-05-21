@@ -5,11 +5,13 @@ namespace candyshop_project.Models.Repository
 {
     public interface IStatisticRepository
     {
-        List<ChartData> AmountPerDayChartData();
-        List<ChartData> RevenuePerDayChartData();
+        List<StatisticalData> AmountPerDayChartData();
+        List<StatisticalData> RevenuePerDayChartData();
 
-        ChartData StateData();
+        StatisticalData StateData();
 
-        List<ChartData> TopLoyalCustomersData();
+        List<StatisticalData> TopLoyalCustomersData();
+        List<StatisticalData> InventoryData();
+
     }
 }
