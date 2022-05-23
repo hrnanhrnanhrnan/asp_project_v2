@@ -24,7 +24,6 @@ namespace Candyshop.Models
         public Campaign Campaign { get; set; }
         public int CandyId { get; set; }
         public Candy Candy { get; set; }
-
-        public decimal PriceWithDiscount => IsFlatAmount ? Candy.Price - (decimal)Amount : Candy.Price * (decimal)(1 - (Amount / 100));
+        public decimal PriceWithDiscount() => IsFlatAmount ? Candy.Price - (decimal)Amount : Candy.Price * (decimal)(1 - (Amount / 100));
     }
 }
