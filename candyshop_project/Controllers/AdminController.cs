@@ -132,9 +132,33 @@ namespace Candyshop.Controllers
             return View(model);
         }
 
-        public IActionResult DeleteProduct()
+        public IActionResult DeleteProduct(int id)
         {
-            return View();
+            if (id == 0)
+            {
+                return NotFound();
+            }
+
+            var product = _candyRepo.GetCandyById(id);
+
+            if (product == null)
+            {
+                return NotFound();
+            }
+            return View(product);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult DeleteProduct(Candy candyToDelete)
+        {
+            var candy = _candyRepo.GetCandyById(candyToDelete.CandyId);
+            if (candy == null)
+            {
+                return NotFound();
+            }
+            _candyRepo.DeleteCandy(candy.CandyId);
+            return RedirectToAction("ListOfCandies");
         }
     }
 }
