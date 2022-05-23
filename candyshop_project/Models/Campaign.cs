@@ -8,6 +8,8 @@ namespace Candyshop.Models
     {
         [Key] public int ID { get; set; }
         public string Name { get; set; } = "Candy Campaign!";
+
+        [DataType(DataType.Date)]
         public DateTime Start { get; set; } = DateTime.Now.Date + TimeSpan.FromDays(1);
         public int Days { get; set; } = 7;
         public DateTime End => Start + TimeSpan.FromDays(Days);
