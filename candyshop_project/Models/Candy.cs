@@ -17,7 +17,7 @@ namespace Candyshop.Models
         public int AmountInStock { get; set; }
         public int CategoryId { get; set; }
         public Category Category { get; set; }
-        public List<Discount> Discounts { get; set; }
+        public List<Discount> Discounts { get; set; } = new List<Discount>();
 
         public Discount FindBestDiscount(DateTime date)
         {
