@@ -11,7 +11,7 @@
                 else
                 {
                     <del>@Model.Candy.Price.ToString("c")</del>;
-                    <mark>@Model.BestDiscount.PriceWithDiscount.ToString("c")</mark>;
+                    <mark>@Model.BestDiscount.PriceWithDiscount().ToString("c")</mark>;
                 }
             </h3>
             <h3><a asp-controller="Candy" asp-action="Details" asp-route-id="@Model.Candy.CandyId" asp-route-discountId="@Model.BestDiscount?.ID ?? -1">@Model.Candy.Name</a></h3>

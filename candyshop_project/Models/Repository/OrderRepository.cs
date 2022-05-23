@@ -31,7 +31,7 @@ namespace Candyshop.Models
                 var orderDetail = new OrderDetail
                 {
                     Amount = shoppingCartItem.Amount,
-                    Price = bestDiscount?.PriceWithDiscount ?? shoppingCartItem.Candy.Price,
+                    Price = bestDiscount?.PriceWithDiscount() ?? shoppingCartItem.Candy.Price,
                     CandyId = shoppingCartItem.Candy.CandyId,
                     OrderId = order.OrderId
                 };

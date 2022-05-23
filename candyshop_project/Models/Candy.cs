@@ -26,14 +26,14 @@ namespace Candyshop.Models
             {
                 if (discount.Campaign.End > date && discount.Campaign.Start < date)
                 {
-                    if (best is null || best.PriceWithDiscount > discount.PriceWithDiscount)
+                    if (best is null || best.PriceWithDiscount() > discount.PriceWithDiscount())
                         best = discount;
                 }
             }
             return best;
         }
 
-        public decimal GetPriceWithBestDiscount(DateTime date) => FindBestDiscount(date)?.PriceWithDiscount ?? Price;
+        public decimal GetPriceWithBestDiscount(DateTime date) => FindBestDiscount(date)?.PriceWithDiscount() ?? Price;
 
         public bool IsInStock() => AmountInStock > 0;
     }

@@ -11,7 +11,7 @@
                 else
                 {
                     <del>@Model.Candy.Price.ToString("c")</del>;
-                    <mark>@Model.BestDiscount.PriceWithDiscount.ToString("c")</mark>;
+                    <mark>@Model.BestDiscount.PriceWithDiscount().ToString("c")</mark>;
                 }</h3>
         <h3><a href="#>@Model.Candy.Name"</h3>
         <p>@Model.Candy.Description</p>
