@@ -10,14 +10,12 @@ namespace Candyshop.Controllers
         private readonly ICampaignRepository _campaignRepository;
         private readonly ICandyRepository _candyRepository;
         private readonly IDiscountRepository _discountRepository;
-        private readonly ICurrencyManager _currencyManager;
 
         public CampaignController(ICampaignRepository campaignRepository, ICandyRepository candyRepository, IDiscountRepository discountRepository)
         {
             _campaignRepository = campaignRepository;
             _candyRepository = candyRepository;
             _discountRepository = discountRepository;
-            _currencyManager = currencyManager;
         }
 
         public IActionResult Index()
