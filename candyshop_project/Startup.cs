@@ -43,7 +43,7 @@ namespace Candyshop
             services.AddScoped<IDiscountRepository, DiscountRepository>();
             services.AddScoped<IOrderDetailRepository, OrderDetailRepository>();
             services.AddScoped<IStatisticRepository, StatisticRepository>();
-
+            services.AddScoped<ICurrencyManager, CurrencyManager>();
 
 
             services.AddHttpContextAccessor();

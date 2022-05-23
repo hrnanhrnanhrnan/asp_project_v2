@@ -1,6 +1,7 @@
 ﻿using Candyshop.Models;
 using Candyshop.ViewModels;
 using Microsoft.AspNetCore.Mvc;
+using System;
 
 namespace Candyshop.Controllers
 {
@@ -9,12 +10,16 @@ namespace Candyshop.Controllers
         private readonly ICampaignRepository _campaignRepository;
         private readonly ICandyRepository _candyRepository;
         private readonly IDiscountRepository _discountRepository;
+        private readonly ICurrencyManager _currencyManager;
 
-        public CampaignController(ICampaignRepository campaignRepository, ICandyRepository candyRepository, IDiscountRepository discountRepository)
+        public CampaignController(ICampaignRepository campaignRepository, ICandyRepository candyRepository, IDiscountRepository discountRepository, ICurrencyManager currencyManager)
         {
             _campaignRepository = campaignRepository;
             _candyRepository = candyRepository;
             _discountRepository = discountRepository;
+            _currencyManager = currencyManager;
+
+            var value = _currencyManager["SEK", DateTime.Now - TimeSpan.FromDays(10)];
         }
 
         public IActionResult Index()
