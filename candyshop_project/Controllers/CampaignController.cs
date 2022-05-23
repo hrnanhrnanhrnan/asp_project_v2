@@ -1,10 +1,12 @@
 ﻿using Candyshop.Models;
 using Candyshop.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 
 namespace Candyshop.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class CampaignController : Controller
     {
         private readonly ICampaignRepository _campaignRepository;

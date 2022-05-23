@@ -1,12 +1,14 @@
 ﻿using Candyshop.Models;
 using candyshop_project.Models.Repository;
 using candyshop_project.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System.Collections.Generic;
 
 namespace Candyshop.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class StatisticController:Controller
     {
 
