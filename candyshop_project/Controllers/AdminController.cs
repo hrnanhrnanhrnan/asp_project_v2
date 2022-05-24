@@ -18,7 +18,8 @@ namespace Candyshop.Controllers
     [Authorize(Roles = "Admin")]
     public class AdminController : Controller
     {
-        private static readonly string warehouseOrigin = "Barton County, Kansas, USA";
+        private static readonly string _warehouseOrigin = "Barton County, Kansas, USA";
+        private static readonly string _token = "hmtTj0EEOYZoAZwm2rw8VN7lcoVIQ";
 
         static HttpClient client;
         private readonly ICandyRepository _candyRepo;
@@ -65,7 +66,7 @@ namespace Candyshop.Controllers
                 };
 
                 HttpResponseMessage response = await client
-                    .GetAsync($"https://api.distancematrix.ai/maps/api/distancematrix/json?origins={warehouseOrigin}&destinations={order.City}&key=hmtTj0EEOYZoAZwm2rw8VN7lcoVIQ");
+                    .GetAsync($"https://api.distancematrix.ai/maps/api/distancematrix/json?origins={_warehouseOrigin}&destinations={order.City}&key={_token}");
 
                 if (response.IsSuccessStatusCode)
                 {
