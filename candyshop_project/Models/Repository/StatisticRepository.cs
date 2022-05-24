@@ -16,6 +16,7 @@ namespace candyshop_project.Models.Repository
 
         public List<StatisticalData> AmountPerDayChartData()
         {
+            /*
             var data = _appDbContext.Orders.GroupBy(x => x.OrderPlaced.Date)
                 .Select(group => new StatisticalData
                 {
@@ -23,6 +24,24 @@ namespace candyshop_project.Models.Repository
                     Amount = group.Count(),
 
                 }).ToList();
+
+            return data;*/
+
+            var allData = (from orderDetail in _appDbContext.OrderDetails
+                           join order in _appDbContext.Orders on orderDetail.OrderId equals order.OrderId into subs
+                           from joineddata in subs.DefaultIfEmpty()
+                           select new StatisticalData
+                           {
+                               Date = joineddata.OrderPlaced.Date,
+                               Amount = orderDetail.Amount,
+                           }).ToList();
+            var data = allData.GroupBy(x => x.Date)
+                .Select(group => new StatisticalData
+                {
+                    Date = group.Key.Date,
+                    Amount = group.Sum(x => x.Amount)
+                }).ToList();
+
 
             return data;
         }
@@ -41,6 +60,7 @@ namespace candyshop_project.Models.Repository
 
         public List<StatisticalData> RevenuePerDayChartData()
         {
+            
             var data = _appDbContext.Orders.GroupBy(x => x.OrderPlaced.Date)
                 .Select(group => new StatisticalData
                 {
@@ -50,6 +70,7 @@ namespace candyshop_project.Models.Repository
                 }).ToList();
 
             return data;
+            
         }
 
         public List<StatisticalData> TopLoyalCustomersData()
@@ -79,6 +100,16 @@ namespace candyshop_project.Models.Repository
             
 
             return data;
+        }
+
+        public List<StatisticalData> PopularProducts()
+        {
+
+
+
+
+
+            return null;
         }
 
     }
