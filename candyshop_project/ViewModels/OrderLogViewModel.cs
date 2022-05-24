@@ -1,4 +1,6 @@
 ﻿using Candyshop.Models;
+using candyshop_project.Models;
+using candyshop_project.Models.DistanceApiModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
