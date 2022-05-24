@@ -33,7 +33,7 @@ namespace Candyshop.Controllers
             _orderRepo = orderRepo;
             _orderDetailRepo = orderDetailRepo;
             client = new HttpClient();
-        }
+        } 
         ~AdminController()
         {
             client.Dispose();
