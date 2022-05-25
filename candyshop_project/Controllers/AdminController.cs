@@ -26,12 +26,14 @@ namespace Candyshop.Controllers
         private readonly ICategoryRepositoty _categoryRepo;
         private readonly IOrderRepository _orderRepo;
         private readonly IOrderDetailRepository _orderDetailRepo;
-        public AdminController(ICandyRepository candyRepo, ICategoryRepositoty categoryRepo, IOrderRepository orderRepo, IOrderDetailRepository orderDetailRepo)
+        private readonly ICurrencyRepository _currencyRepository;
+        public AdminController(ICandyRepository candyRepo, ICategoryRepositoty categoryRepo, IOrderRepository orderRepo, IOrderDetailRepository orderDetailRepo, ICurrencyRepository currencyRepository)
         {
             _candyRepo = candyRepo;
             _categoryRepo = categoryRepo;
             _orderRepo = orderRepo;
             _orderDetailRepo = orderDetailRepo;
+            _currencyRepository = currencyRepository;
             client = new HttpClient();
         } 
         ~AdminController()
@@ -54,16 +56,19 @@ namespace Candyshop.Controllers
         public async Task<IActionResult> OrderLogDetails(int id)
         {
             var order = _orderRepo.GetOrderById(id);
-            if(order != null)
+            if (order != null)
             {
                 // create new orderlogvm and set order prop from order found by id from orderlogs view,
                 // set candies prop from orderdetails table and set distance/duration props by fetching from api by sending in address from order city
 
+                var symbols = await _currencyRepository.GetSymbols();
+
                 var orderLogViewModel = new OrderLogViewModel
                 {
                     Order = order,
-                    Candies = _orderDetailRepo.GetAllOrderDetails().Where(od => od.OrderId == order.OrderId).Select(c => c.Candy).ToList()
-                };
+                    Candies = _orderDetailRepo.GetAllOrderDetails().Where(od => od.OrderId == order.OrderId).Select(c => c.Candy).ToList(),
+                    Symbols = symbols.Symbols
+            };
 
                 HttpResponseMessage response = await client
                     .GetAsync($"https://api.distancematrix.ai/maps/api/distancematrix/json?origins={_warehouseOrigin}&destinations={order.City}&key={_token}");
@@ -83,12 +88,30 @@ namespace Candyshop.Controllers
                         orderLogViewModel.Duration = "Not found";
                     }
                 }
+                ViewBag.Currency = "";
 
                 return View(orderLogViewModel);
             }
 
             Response.StatusCode = 404;
             return View("_ItemNotFound", id);
+        }
+
+        [HttpGet]
+        public string GetTotalInCurrency(string currency, string total, string orderDate)
+        {
+            DateTime date = DateTime.Parse(orderDate);
+            
+            var currencyRate = _currencyRepository.GetRate("SEK", date);
+            if (currencyRate.Rates.TryGetValue(currency, out double rates))
+            {
+                double changeCurrency = double.Parse(total);
+                changeCurrency = changeCurrency * rates;
+
+                return $"{Math.Round(changeCurrency, 2)} {currency}";
+            }
+
+            return $"{currency}, {total}, {orderDate}";
         }
 
         [HttpPost]

@@ -3,7 +3,20 @@
 <h1>OrderId: @Model.Order.OrderId</h1>
 <h4>Distance from warehouse to @Model.Order.City: @Model.Distance </h4>
 <h4>Time to deliver to @Model.Order.City: @Model.Duration</h4>
-<h4>Order Total: @Model.Order.OrderTotal</h4>
+<h4>Order Total: <span id="orderTotal"></span></h4>
+
+<div>
+    <select id="selectCurrency">
+    @foreach (var item in Model.Symbols)
+    {
+        if (item == "RUB")
+        {
+            continue;
+        }
+		 <option>@item</option>
+	}
+    </select>
+</div>
 
 <h1>Products</h1>
 @if (Model.Candies.Count > 0)
@@ -17,3 +30,19 @@
 <div>
     <a class="btn btn-primary" asp-controller="Admin" asp-action="OrderLogs">Back</a>
 </div>
+
+<script type="text/javascript">
+    const select = document.getElementById("selectCurrency");
+    select.addEventListener("change", (e) => {
+        $.ajax({
+            url: "/Admin/GetTotalInCurrency",
+            type: "get",
+            data: {
+                "currency": e.target.value, "total": "@Model.Order.OrderTotal", "orderDate": "@Model.Order.OrderPlaced"
+            },
+            success: function (data) {
+                $("#orderTotal").html(data)
+            }
+        })
+    })
+</script>

@@ -1,4 +1,5 @@
-﻿using Candyshop.Models;
+﻿using Candyshop;
+using Candyshop.Models;
 using candyshop_project.Models;
 using candyshop_project.Models.DistanceApiModels;
 using System;
@@ -14,5 +15,7 @@ namespace candyshop_project.ViewModels
         public string Distance { get; set; }
         public string Duration { get; set; }
         public List<Candy> Candies { get; set; }
+        public List<string> Symbols { get; set; }
+        public CurrencyRepository CurrencyRate { get; set; } = new CurrencyRepository();
     }
 }
