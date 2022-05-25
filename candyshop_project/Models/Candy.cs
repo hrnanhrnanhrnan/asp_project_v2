@@ -13,7 +13,7 @@ namespace Candyshop.Models
         [Required]
         [StringLength(25, MinimumLength = 1, ErrorMessage = "Minimum 1 letter and Maximum 25 letters")]
         public string Name { get; set; }
-        [StringLength(50, MinimumLength = 1, ErrorMessage = "Minimum 1 letter and Maximum 50 letters")]
+        [StringLength(100, MinimumLength = 1, ErrorMessage = "Minimum 1 letter and Maximum 100 letters")]
         public string Description { get; set; }
         public decimal Price { get; set; }
         public string ImageUrl { get; set; }
