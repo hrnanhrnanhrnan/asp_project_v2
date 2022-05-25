@@ -1,6 +1,7 @@
 ﻿using Candyshop.Models;
 using System.Collections.Generic;
 using System.Linq;
+using System;
 
 namespace candyshop_project.Models.Repository
 {
@@ -16,16 +17,6 @@ namespace candyshop_project.Models.Repository
 
         public List<StatisticalData> AmountPerDayChartData()
         {
-            /*
-            var data = _appDbContext.Orders.GroupBy(x => x.OrderPlaced.Date)
-                .Select(group => new StatisticalData
-                {
-                    Date = group.Key.Date,
-                    Amount = group.Count(),
-
-                }).ToList();
-
-            return data;*/
 
             var allData = (from orderDetail in _appDbContext.OrderDetails
                            join order in _appDbContext.Orders on orderDetail.OrderId equals order.OrderId into subs
@@ -35,6 +26,7 @@ namespace candyshop_project.Models.Repository
                                Date = joineddata.OrderPlaced.Date,
                                Amount = orderDetail.Amount,
                            }).ToList();
+
             var data = allData.GroupBy(x => x.Date)
                 .Select(group => new StatisticalData
                 {
@@ -104,12 +96,30 @@ namespace candyshop_project.Models.Repository
 
         public List<StatisticalData> PopularProducts()
         {
+            
+
+            var data = _appDbContext.OrderDetails.Join(
+                _appDbContext.Orders,
+                orderDetail => orderDetail.OrderId,
+                order => order.OrderId,
+                (orderDetail, order) => new { orderDetail, order }).Join(
+                _appDbContext.Candies,
+                od => od.orderDetail.CandyId,
+                candy => candy.CandyId,
+                (od, candy) => new { od, candy })
+                .Where(x => (x.od.order.OrderPlaced.Month < DateTime.Now.Month))
+                .GroupBy(group => new { group.candy.Name, group.candy.CandyId, group.candy.Price })
+                .Select(x => new StatisticalData
+                {
+                    Id = x.Key.CandyId,
+                    Amount = x.Sum(z => z.od.orderDetail.Amount),
+                    Name = x.Key.Name,
+                    Price = x.Key.Price
+                }).Where(x=>x.Amount>50).ToList();
 
 
 
-
-
-            return null;
+            return data;
         }
 
     }

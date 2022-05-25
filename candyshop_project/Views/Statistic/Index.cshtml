@@ -32,14 +32,38 @@
         </div>
 
       </div>
+
     </div>
    
-    <h2>Revenue</h2>
+    <h2>Sale analysis</h2>
     <div id="chartContainerColumn" style="height: 370px; width: 100%;margin-top:6%"></div>
     <div id="chartContainerLine" style="height: 370px; width: 100%;margin-top:10%"></div>
 
+    <h3>Popular products in last month</h3>
+    <div>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Candy</th>
+                    <th>Price</th>
+                    <th>Amount</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach(var item in Model.PopularProducts)
+                {
+                    <tr>
+                        <td> @item.Name </td>
+                        <td> @item.Price </td>
+                        <td> @item.Amount</td>
+                    </tr>
+                }
+            </tbody>
 
-    <h2>Inventory</h2>
+        </table>
+    </div>
+
+    <h2>Product inventory</h2>
     <div>
         <table class="table table-striped">
             <thead>

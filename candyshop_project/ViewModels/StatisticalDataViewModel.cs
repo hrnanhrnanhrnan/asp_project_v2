@@ -10,5 +10,6 @@ namespace candyshop_project.ViewModels
         public StatisticalData stateData { get; set; }  
 
         public List<StatisticalData> InventoryData { get; set; }
+        public List<StatisticalData> PopularProducts { get; set; }
     }
 }

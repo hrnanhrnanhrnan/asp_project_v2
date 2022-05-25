@@ -30,6 +30,8 @@ namespace Candyshop.Controllers
             model.LoyalCustomerData = _statisticRepository.TopLoyalCustomersData();
             model.stateData= _statisticRepository.StateData();
             model.InventoryData= _statisticRepository.InventoryData();
+            model.PopularProducts = _statisticRepository.PopularProducts();
+
 
             return View(model);
         }
