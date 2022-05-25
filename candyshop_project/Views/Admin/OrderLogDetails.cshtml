@@ -1,48 +1,88 @@
 ﻿@model OrderLogViewModel
 
-<h1>OrderId: @Model.Order.OrderId</h1>
-<h4>Distance from warehouse to @Model.Order.City: @Model.Distance </h4>
-<h4>Time to deliver to @Model.Order.City: @Model.Duration</h4>
-<h4>Order Total: <span id="orderTotal"></span></h4>
-
-<div>
-    <select id="selectCurrency">
-    @foreach (var item in Model.Symbols)
-    {
-        if (item == "RUB")
-        {
-            continue;
-        }
-		 <option>@item</option>
-	}
-    </select>
-</div>
-
-<h1>Products</h1>
-@if (Model.Candies.Count > 0)
-{
-    foreach (var candy in Model.Candies)
-    {
-        <partial name="_candyCard" model="new CandyCardViewModel { Candy=candy, BestDiscount=candy.FindBestDiscount(DateTime.Now) }" />
-    }
-}
-
-<div>
+<div class="back-btn-div">
     <a class="btn btn-primary" asp-controller="Admin" asp-action="OrderLogs">Back</a>
 </div>
 
+<h2>Order details</h2>
+
+    @{ if (Model.Symbols != null)
+        {
+            <h4>Choose currency: </h4>
+            <select id="selectCurrency">
+                @foreach (var item in Model.Symbols)
+                {
+                <option>@item</option>
+                }
+            </select>
+        }
+        }
+
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">OrderId</th>
+            <th scope="col">Name of customer</th>
+            <th scope="col">Address</th>
+            <th scope="col">PhoneNumber</th>
+            <th scope="col">Delivery distance</th>
+            <th scope="col">Delivery time</th>
+            <th scope="col">Order Total</th>
+            <th scope="col">Date of Order</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        <tr>
+            <th scope="row">@Model.Order.OrderId</th>
+            <th scope="row">@($"{Model.Order.FirstName} {Model.Order.LastName}")</th>
+            <th scope="row">@($"{Model.Order.Address}, {Model.Order.City}, {Model.Order.ZipCode}, {Model.Order.State}")</th>
+            <th scope="row">@Model.Order.PhoneNumber</th>
+            <th scope="row">@Model.Distance</th>
+            <th scope="row">@Model.Duration</th>
+            <th scope="row"><span id="orderTotal"></span></th>
+            <th scope="row">@Model.Order.OrderPlaced.ToString("yyyy-MM-dd")</th>
+        </tr>
+    </tbody>
+
+</table>
+
+<h2>Products</h2>
+<div>
+    @if (Model.Candies.Count > 0)
+    {
+        foreach (var candy in Model.Candies)
+        {
+            <partial name="_candyCard" model="new CandyCardViewModel { Candy=candy, BestDiscount=candy.FindBestDiscount(DateTime.Now) }" />
+        }
+    }
+</div>
+
+
 <script type="text/javascript">
+
     const select = document.getElementById("selectCurrency");
-    select.addEventListener("change", (e) => {
-        $.ajax({
+
+
+    const getTotalInCurrency = (currency) => {
+                $.ajax({
             url: "/Admin/GetTotalInCurrency",
             type: "get",
             data: {
-                "currency": e.target.value, "total": "@Model.Order.OrderTotal", "orderDate": "@Model.Order.OrderPlaced"
+                "currency": currency, "total": "@Model.Order.OrderTotal", "orderDate": "@Model.Order.OrderPlaced"
             },
             success: function (data) {
                 $("#orderTotal").html(data)
             }
         })
+    }
+    window.onload = () => {
+        select.value = "SEK"
+        getTotalInCurrency(select.value)
+    }
+    select.addEventListener("change", (e) => {
+        getTotalInCurrency(e.target.value)
     })
+
+
 </script>

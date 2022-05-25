@@ -61,41 +61,59 @@ namespace Candyshop.Controllers
                 // create new orderlogvm and set order prop from order found by id from orderlogs view,
                 // set candies prop from orderdetails table and set distance/duration props by fetching from api by sending in address from order city
 
-                var symbols = await _currencyRepository.GetSymbols();
-
                 var orderLogViewModel = new OrderLogViewModel
                 {
                     Order = order,
                     Candies = _orderDetailRepo.GetAllOrderDetails().Where(od => od.OrderId == order.OrderId).Select(c => c.Candy).ToList(),
-                    Symbols = symbols.Symbols
-            };
+                };
 
-                HttpResponseMessage response = await client
-                    .GetAsync($"https://api.distancematrix.ai/maps/api/distancematrix/json?origins={_warehouseOrigin}&destinations={order.City}&key={_token}");
-
-                if (response.IsSuccessStatusCode)
+                try
                 {
+                    var symbols = await _currencyRepository.GetSymbols();
+                    var existingRates = _currencyRepository.GetRate("SEK", order.OrderPlaced).Rates;
+
+                    orderLogViewModel.Symbols = symbols.Symbols.Where(symbol => existingRates.ContainsKey(symbol)).ToList();
+
                     try
                     {
-                        var data = await response.Content.ReadAsStringAsync();
-                        Root obj = JsonConvert.DeserializeObject<Root>(data);
-                        orderLogViewModel.Duration = obj.Rows[0].Elements[0].Duration.Text;
-                        orderLogViewModel.Distance = obj.Rows[0].Elements[0].Distance.Text;
+                        HttpResponseMessage response = await client
+                        .GetAsync($"https://api.distancematrix.ai/maps/api/distancematrix/json?origins={_warehouseOrigin}&destinations={order.City}&key={_token}");
+
+                        if (response.IsSuccessStatusCode)
+                        {
+                            var data = await response.Content.ReadAsStringAsync();
+                            Root obj = JsonConvert.DeserializeObject<Root>(data);
+                            if (obj.Status == "OK")
+                            {
+                                orderLogViewModel.Duration = obj.Rows[0].Elements[0].Duration?.Text;
+                                orderLogViewModel.Distance = obj.Rows[0].Elements[0].Distance?.Text;
+
+                                return View(orderLogViewModel);
+                            }
+                            throw new Exception();
+                        }
+                        throw new Exception();
                     }
                     catch (Exception)
                     {
                         orderLogViewModel.Distance = "Not found";
                         orderLogViewModel.Duration = "Not found";
+                        return View(orderLogViewModel);
                     }
                 }
-                ViewBag.Currency = "";
-
-                return View(orderLogViewModel);
+                catch (Exception)
+                {
+                    orderLogViewModel.Distance = "Not found";
+                    orderLogViewModel.Duration = "Not found";
+                    return View(orderLogViewModel);
+                }
             }
 
             Response.StatusCode = 404;
             return View("_ItemNotFound", id);
         }
+
+
 
         [HttpGet]
         public string GetTotalInCurrency(string currency, string total, string orderDate)

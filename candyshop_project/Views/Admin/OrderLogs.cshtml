@@ -1,23 +1,32 @@
 ﻿@model IEnumerable<Order>
 
-    
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">OrderId</th>
+            <th scope="col">Date of order</th>
+        </tr>
+    </thead>
+    <tbody>
 
-        <table class="table">
-            <thead>
-                <tr>
-                    <th scope="col">OrderId</th>
-                    <th scope="col">Date</th>
-                </tr>
-            </thead>
-            <tbody>
+        @foreach (var item in Model)
+        {
+            <tr class="row-link" scope="row">
+                <th>@item.OrderId</th>
+                <th>@item.OrderPlaced.ToString("yyyy-MM-dd")</th>
+            </tr>
+        }
 
-                @foreach (var item in Model)
-                {
-                        <tr>
-                            <th scope="row"><a asp-action="OrderLogDetails" asp-route-id="@item.OrderId">@item.OrderId</a></th>
-                            <td>@item.OrderPlaced</td>
-                        </tr>
-                }
+    </tbody>
+</table>
 
-            </tbody>
-        </table>
+<script>
+    $(".row-link").click((e) => {
+        window.location.replace(`/Admin/OrderLogDetails/${e.currentTarget.cells[0].innerText}`)
+    }).hover(function () {
+        $(this).css("cursor", "pointer").css("background", "lightgrey")
+    },
+        function () {
+            $(this).css("cursor", "default").css("background", "white")
+        })
+</script>
