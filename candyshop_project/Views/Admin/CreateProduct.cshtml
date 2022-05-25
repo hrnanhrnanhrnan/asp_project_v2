@@ -17,7 +17,7 @@
                         <label asp-for="Name"></label>
                     </div>
                     <div class="col-8">
-                        <input asp-for="Name" class="form-control" />
+                        <input asp-for="Name" class="form-control" required />
                         <span asp-validation-for="Name" class="text-danger"></span>
                     </div>
                 </div>
@@ -57,15 +57,15 @@
                         <span asp-validation-for="ImageThumbnailUrl" class="text-danger"></span>
                     </div>
                 </div>
-                @*<div class="form-group row">
+                <div class="form-group row">
                     <div class="col-4">
-                        <label asp-for="IsOnSale"></label>
+                        <label asp-for="AmountInStock"></label>
                     </div>
                     <div class="col-8">
-                        <input asp-for="IsOnSale" class="form-control" type="checkbox" />
-                        <span asp-validation-for="IsOnSale" class="text-danger"></span>
+                        <input asp-for="AmountInStock" class="form-control" />
+                        <span asp-validation-for="AmountInStock" class="text-danger"></span>
                     </div>
-                </div>*@
+                </div>
                 <div class="form-group row">
                     <div class="col-8">
                         <select id="Select1" asp-for="CategoryId" asp-items="@(new SelectList(Model.Categories, nameof(Candy.CategoryId), nameof(Candy.Category.CategoryName)))">
@@ -74,8 +74,8 @@
                 </div>
             </div>
         </div>
-        <div class="col-6">
-            <input type="submit" class="btn btn-info text-left" value="" />
+        <div>
+            <input type="submit" class="btn btn-info text-left" value="Create Product" />
             <a class="btn btn-primary" asp-controller="Admin" asp-action="Index">Back</a>
         </div>
     </div>
