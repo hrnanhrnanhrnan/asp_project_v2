@@ -90,7 +90,7 @@ namespace candyshop_project.Models.Repository
             return data;
         }
 
-        public List<StatisticalData> PopularProducts()
+        public List<StatisticalData> PopularProducts(string filterValue)
         {
 
             var allData = _appDbContext.OrderDetails.Include(x => x.Order).Include(y => y.Candy);
@@ -103,7 +103,7 @@ namespace candyshop_project.Models.Repository
                     Amount = group.Sum(z => z.Amount),
                     Name = group.Key.Name,
                     Price = group.Key.Price
-                }).Where(x => x.Amount > 50).OrderByDescending(x => x.Amount).ToList();
+                }).Where(x => x.Amount > Convert.ToInt32(filterValue)).OrderByDescending(x => x.Amount).ToList();
 
             return data;
         }

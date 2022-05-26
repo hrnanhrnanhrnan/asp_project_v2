@@ -37,16 +37,18 @@ namespace Candyshop.Controllers
             model.LoyalCustomerData = _statisticRepository.TopLoyalCustomersData();
             model.stateData = _statisticRepository.StateData();
             model.InventoryData = _statisticRepository.InventoryData();
-            model.PopularProducts = _statisticRepository.PopularProducts();
+            model.PopularProducts = _statisticRepository.PopularProducts("50");
 
             model.Symbols.Sort();
             return View(model);
         }
 
-        /*
-        public IActionResult PopularProductFilter(int filterValue)
+        [HttpPost]
+        public JsonResult PopularProductFilter(string filterValue)
         {
-
-        }*/
+            var model = new StatisticalDataViewModel();
+            model.PopularProducts = _statisticRepository.PopularProducts(filterValue);
+            return Json(model);
+        }
     }
 }
