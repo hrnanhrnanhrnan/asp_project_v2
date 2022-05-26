@@ -114,22 +114,20 @@ namespace Candyshop.Controllers
         }
 
 
-
         [HttpGet]
-        public string GetTotalInCurrency(string currency, string total, string orderDate)
+        public string GetTotalInCurrency(string currency, string orderDate)
         {
             DateTime date = DateTime.Parse(orderDate);
             
             var currencyRate = _currencyRepository.GetRate("SEK", date);
             if (currencyRate.Rates.TryGetValue(currency, out double rates))
             {
-                double changeCurrency = double.Parse(total);
-                changeCurrency = changeCurrency * rates;
 
-                return $"{Math.Round(changeCurrency, 2)} {currency}";
+                return $"{rates}";
+            } else
+            {
+                return null;
             }
-
-            return $"{currency}, {total}, {orderDate}";
         }
 
         [HttpPost]

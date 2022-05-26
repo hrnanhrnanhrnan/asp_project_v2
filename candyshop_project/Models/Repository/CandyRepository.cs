@@ -20,7 +20,6 @@ namespace Candyshop.Models
             {
                 return _appDbContext.Candies.Include(c => c.Category).Include(c => c.Discounts).ThenInclude(d => d.Campaign);
             }
-
         }
 
         public IEnumerable<Candy> GetCandyOnSale
@@ -32,6 +31,7 @@ namespace Candyshop.Models
             }
         }
 
+        //Creates new candy, through razor page
         public Candy CreateCandy(Candy candy)
         {
             if (candy != null)
@@ -43,11 +43,13 @@ namespace Candyshop.Models
             return null;
         }
 
+        //Get candy by ID
         public Candy GetCandyById(int candyId)
         {
             return _appDbContext.Candies.Include(c => c.Category).FirstOrDefault(c => c.CandyId == candyId);
         }
 
+        //Updates selected candy, by passing a new candy object
         public Candy UpdateCandy(Candy candy)
         {
             var candyFromDb = _appDbContext.Candies.Include(c => c.Category).FirstOrDefault(c => c.CandyId == candy.CandyId);
@@ -63,6 +65,7 @@ namespace Candyshop.Models
             return candy;
         }
 
+        //Delete Candy by ID
         public void DeleteCandy(int id)
         {
             var candy = _appDbContext.Candies.FirstOrDefault(c => c.CandyId == id);

@@ -69,10 +69,16 @@
             url: "/Admin/GetTotalInCurrency",
             type: "get",
             data: {
-                "currency": currency, "total": "@Model.Order.OrderTotal", "orderDate": "@Model.Order.OrderPlaced"
+                "currency": currency, "orderDate": "@Model.Order.OrderPlaced"
             },
             success: function (data) {
-                $("#orderTotal").html(data)
+
+                if (data) {
+                    const number = (parseFloat("@Model.Order.OrderTotal".replace(",", ".")) * parseFloat(data.replace(",", ".")))
+                    $("#orderTotal").html(`${number.toFixed(2)} ${currency}`)
+                } else {
+                    $("#orderTotal").html("@Model.Order.OrderTotal SEK")
+                }
             }
         })
     }
