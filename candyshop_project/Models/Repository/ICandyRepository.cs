@@ -13,5 +13,6 @@ namespace Candyshop.Models
         Candy CreateCandy(Candy candy);
         Candy UpdateCandy(Candy candy);
         void DeleteCandy(int id);
+        IEnumerable<Candy> GetMostPopular(int count);
     }
 }
