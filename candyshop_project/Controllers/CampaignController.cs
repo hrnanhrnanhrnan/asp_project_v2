@@ -22,16 +22,30 @@ namespace Candyshop.Controllers
 
         public IActionResult Index()
         {
-            return View(_campaignRepository.Campaigns);
+            try
+            {
+                return View(_campaignRepository.Campaigns);
+            }
+            catch
+            {
+                return StatusCode(500);
+            }
         }
 
         public IActionResult Edit(int id)
         {
-            return View(new CampaignEditViewModel()
+            try
             {
-                Campaign = _campaignRepository.GetById(id),
-                Candies = _candyRepository.GetAllCandy
-            });
+                return View(new CampaignEditViewModel()
+                {
+                    Campaign = _campaignRepository.GetById(id),
+                    Candies = _candyRepository.GetAllCandy
+                });
+            }
+            catch
+            {
+                return BadRequest();
+            }
         }
 
         public IActionResult Create()
@@ -41,58 +55,114 @@ namespace Candyshop.Controllers
 
         public IActionResult Delete(int id)
         {
-            var campaign = _campaignRepository.GetById(id);
-            if(campaign != null)
-                _campaignRepository.DeleteCampaign(campaign);
-            return Redirect("../Index");
+            try
+            {
+                var campaign = _campaignRepository.GetById(id);
+                if (campaign != null)
+                    _campaignRepository.DeleteCampaign(campaign);
+                return Redirect("../Index");
+            }
+            catch
+            {
+                return BadRequest();
+            }
         }
 
         public IActionResult SubmitCreateCampaign(Campaign campaign)
         {
-            _campaignRepository.CreateCampaign(campaign);
-            return RedirectToAction("Edit", new { id = campaign.ID });
+            try
+            {
+                _campaignRepository.CreateCampaign(campaign);
+                return RedirectToAction("Edit", new { id = campaign.ID });
+            }
+            catch
+            {
+                return BadRequest();
+            }
         }
 
         public IActionResult SubmitEditCampaign(CampaignEditViewModel view)
         {
-            _campaignRepository.UpdateCampaign(view.Campaign);
-            return Redirect("Index");
+            try
+            {
+                _campaignRepository.UpdateCampaign(view.Campaign);
+                return Redirect("Index");
+            }
+            catch
+            {
+                return BadRequest();
+            }
         }
 
         public IActionResult CreateDiscount(int campaign, int candy)
         {
-            return View(new Discount()
+            try
             {
-                CampaignId = campaign,
-                CandyId = candy,
-            });
+                return View(new Discount()
+                {
+                    CampaignId = campaign,
+                    CandyId = candy,
+                });
+            }
+            catch
+            {
+                return BadRequest();
+            }
         }
 
         public IActionResult AddDiscount(Discount discount)
         {
-            _discountRepository.CreateDiscount(discount);
-            return RedirectToAction("Edit", new { id = discount.CampaignId });
+            try
+            {
+                _discountRepository.CreateDiscount(discount);
+                return RedirectToAction("Edit", new { id = discount.CampaignId });
+            }
+            catch
+            {
+                return BadRequest();
+            }
         }
 
         public IActionResult EditDiscount(int id)
         {
-            var discount = _discountRepository.GetById(id);
-            return View(discount);
+            try
+            {
+                var discount = _discountRepository.GetById(id);
+                return View(discount);
+            }
+            catch
+            {
+                return BadRequest();
+            }
         }
 
         public IActionResult SubmitEditDiscount(Discount discount)
         {
-            _discountRepository.UpdateDiscount(discount);
-            return RedirectToAction("Edit", new { id = discount.CampaignId });
+            try
+            {
+                _discountRepository.UpdateDiscount(discount);
+                return RedirectToAction("Edit", new { id = discount.CampaignId });
+            }
+            catch
+            {
+                return BadRequest();
+            }
         }
 
         public IActionResult RemoveDiscount(int id)
         {
-            var discount = _discountRepository.GetById(id);
-            int campaignID = discount.CampaignId;
-            _discountRepository.DeleteDiscount(discount);
+            try
+            {
+                var discount = _discountRepository.GetById(id);
+                int campaignID = discount.CampaignId;
+                _discountRepository.DeleteDiscount(discount);
 
-            return RedirectToAction("Edit", new { id = discount.CampaignId });
+                return RedirectToAction("Edit", new { id = discount.CampaignId });
+            }
+            catch
+            {
+                return BadRequest();
+            }
         }
     }
 }
