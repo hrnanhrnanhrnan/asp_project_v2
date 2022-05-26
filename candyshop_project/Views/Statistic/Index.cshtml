@@ -7,35 +7,48 @@
 </head>
 <body>
 
-	<h1>Market insight 
+    <h1>
+        Market insight
         <small class="text-muted">| A statistical summary</small>
     </h1>
     <hr />
 
+    @{ if (Model.Symbols != null)
+        {
+            <h4>Choose currency: </h4>
+            <select id="selectCurrency">
+                @foreach (var item in Model.Symbols)
+                {
+                    <option>@item</option>
+                }
+            </select>
+        }
+    }
+
     <div class="container_sale">
-      <div class="fixed">
-        <h3>Highest state revenue</h3>
-        <div>
-            <span>@Model.stateData.State</span>
-            <span style="padding-left:3%">@Model.stateData.Amount$</span>
-        </div>
+        <div class="fixed">
+            <h3>Highest state revenue</h3>
+            <div>
+                <span>@Model.stateData.State</span>
+                <span style="padding-left:3%" class="values">@Model.stateData.Amount</span>
+            </div>
 
-      </div>
-      <div class="flex-item">
-        <h3>Top 3 loyal customers</h3>
-        <div>
-            @foreach(var customer in Model.LoyalCustomerData)
-            {
-                <span>@Html.DisplayFor(x=>customer.Name)</span>
-                <span style="padding-left:3%">@Html.DisplayFor(x=>customer.Amount)$</span>
-                <br />
-            }
         </div>
+        <div class="flex-item">
+            <h3>Top 3 loyal customers</h3>
+            <div>
+                @foreach (var customer in Model.LoyalCustomerData)
+                {
+                    <span>@Html.DisplayFor(x => customer.Name)</span>
+                    <span style="padding-left:3%" class="values">@Html.DisplayFor(x => customer.Amount)</span>
+                    <br />
+                }
+            </div>
 
-      </div>
+        </div>
 
     </div>
-   
+
     <h2>Sale analysis</h2>
     <div id="chartContainerColumn" style="height: 370px; width: 100%;margin-top:6%"></div>
     <div id="chartContainerLine" style="height: 370px; width: 100%;margin-top:10%"></div>
@@ -51,11 +64,11 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach(var item in Model.PopularProducts)
+                @foreach (var item in Model.PopularProducts)
                 {
                     <tr>
                         <td> @item.Name </td>
-                        <td> @item.Price </td>
+                        <td class="values"> @item.Price </td>
                         <td> @item.Amount</td>
                     </tr>
                 }
@@ -75,11 +88,11 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach(var item in Model.InventoryData)
+                @foreach (var item in Model.InventoryData)
                 {
                     <tr>
                         <td> @item.Name </td>
-                        <td> @item.Price </td>
+                        <td class="values"> @item.Price </td>
                         <td> @item.Amount</td>
                     </tr>
                 }
@@ -93,15 +106,56 @@
 <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
-window.onload = function () {
-    $("#image").hide();
+    const select = document.getElementById("selectCurrency");
+    let values = []
+    let originalValues = []
 
-    var amountPerDayChartData= @Html.Raw(ViewBag.DataPointsAmountPerDay);
-    var revenueData= @Html.Raw(ViewBag.DataPointsRevenue);
+    const getTotalInCurrency = (currency) => {
+                $.ajax({
+            url: "/Admin/GetTotalInCurrency",
+            type: "get",
+                    data: {
+                        "currency": currency, "orderDate": "@DateTime.Now"
+            },
+            success: function (data) {
 
-    SaleAmountPerDay(amountPerDayChartData);
-    SaleRevenuePerDay(revenueData);
+                if (data) {
+                    for (var i = 0; i < values.length; i++) {
+                        const number = originalValues[i] * parseFloat(data.replace(",", "."))
+                        values[i].innerHTML = `${number.toFixed(2)} ${currency}`
+                    }
+                } else {
+                    $("#orderTotal").html("ERROR")
+                }
+            }
+        })
     }
+    window.onload = function () {
+        $("#image").hide();
+
+        var amountPerDayChartData= @Html.Raw(ViewBag.DataPointsAmountPerDay);
+        var revenueData= @Html.Raw(ViewBag.DataPointsRevenue);
+
+        values = $(".values").toArray()
+
+        values.map(value => {
+            originalValues.push(parseFloat(value.innerHTML.replace(",", ".")))
+        })
+
+
+        SaleAmountPerDay(amountPerDayChartData);
+        SaleRevenuePerDay(revenueData);
+
+        select.value = "SEK"
+        getTotalInCurrency(select.value)
+    }
+
+
+    select.addEventListener("change", (e) => {
+        getTotalInCurrency(e.target.value)
+    })
+
+
 
 </script>
 
