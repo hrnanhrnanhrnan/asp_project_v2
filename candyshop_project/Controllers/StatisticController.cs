@@ -39,6 +39,7 @@ namespace Candyshop.Controllers
             model.InventoryData = _statisticRepository.InventoryData();
             model.PopularProducts = _statisticRepository.PopularProducts();
 
+            model.Symbols.Sort();
             return View(model);
         }
 

@@ -73,6 +73,7 @@ namespace Candyshop.Controllers
                     var existingRates = _currencyRepository.GetRate("SEK", order.OrderPlaced).Rates;
 
                     orderLogViewModel.Symbols = symbols.Symbols.Where(symbol => existingRates.ContainsKey(symbol)).ToList();
+                    orderLogViewModel.Symbols.Sort();
 
                     try
                     {
