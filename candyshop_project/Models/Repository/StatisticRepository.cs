@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System;
+using Microsoft.EntityFrameworkCore;
 
 namespace candyshop_project.Models.Repository
 {
@@ -18,21 +19,16 @@ namespace candyshop_project.Models.Repository
         public List<StatisticalData> AmountPerDayChartData()
         {
 
-            var allData = (from orderDetail in _appDbContext.OrderDetails
-                           join order in _appDbContext.Orders on orderDetail.OrderId equals order.OrderId into subs
-                           from joineddata in subs.DefaultIfEmpty()
-                           select new StatisticalData
-                           {
-                               Date = joineddata.OrderPlaced.Date,
-                               Amount = orderDetail.Amount,
-                           }).ToList();
 
-            var data = allData.GroupBy(x => x.Date)
+            var allData = _appDbContext.OrderDetails.Include(x => x.Order).Include(y => y.Candy);
+
+            var data = allData.GroupBy(x => x.Order.OrderPlaced.Date)
                 .Select(group => new StatisticalData
                 {
                     Date = group.Key.Date,
-                    Amount = group.Sum(x => x.Amount)
+                    Amount = group.Sum(x => x.Amount),
                 }).ToList();
+
 
 
             return data;
@@ -96,31 +92,23 @@ namespace candyshop_project.Models.Repository
 
         public List<StatisticalData> PopularProducts()
         {
-            
 
-            var data = _appDbContext.OrderDetails.Join(
-                _appDbContext.Orders,
-                orderDetail => orderDetail.OrderId,
-                order => order.OrderId,
-                (orderDetail, order) => new { orderDetail, order }).Join(
-                _appDbContext.Candies,
-                od => od.orderDetail.CandyId,
-                candy => candy.CandyId,
-                (od, candy) => new { od, candy })
-                .Where(x => (x.od.order.OrderPlaced.Month < DateTime.Now.Month))
-                .GroupBy(group => new { group.candy.Name, group.candy.CandyId, group.candy.Price })
-                .Select(x => new StatisticalData
+            var allData = _appDbContext.OrderDetails.Include(x => x.Order).Include(y => y.Candy);
+
+            var data = allData.Where(x => (x.Order.OrderPlaced.Month < DateTime.Now.Month))
+                .GroupBy(x => new { x.Candy.Name,x.Candy.CandyId,x.Candy.Price })
+                .Select(group => new StatisticalData
                 {
-                    Id = x.Key.CandyId,
-                    Amount = x.Sum(z => z.od.orderDetail.Amount),
-                    Name = x.Key.Name,
-                    Price = x.Key.Price
-                }).Where(x=>x.Amount>50).ToList();
-
-
+                    Id = group.Key.CandyId,
+                    Amount = group.Sum(z => z.Amount),
+                    Name = group.Key.Name,
+                    Price = group.Key.Price
+                }).Where(x => x.Amount > 50).OrderByDescending(x => x.Amount).ToList();
 
             return data;
         }
+
+
 
     }
 }

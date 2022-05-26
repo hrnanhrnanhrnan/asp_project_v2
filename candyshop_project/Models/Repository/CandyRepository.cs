@@ -75,5 +75,19 @@ namespace Candyshop.Models
                 _appDbContext.SaveChanges();
             }
         }
+
+        public IEnumerable<Candy> GetMostPopular(int count)
+        {
+            var scores = new Dictionary<int, int>();
+            foreach (var detail in _appDbContext.OrderDetails)
+            {
+                if (scores.TryGetValue(detail.CandyId, out int score))
+                    scores[detail.CandyId] = score + detail.Amount;
+                else
+                    scores[detail.CandyId] = detail.Amount;
+            }
+
+            return scores.OrderByDescending(kvp => kvp.Value).Take(count).Select(kvp => GetCandyById(kvp.Key));
+        }
     }
 }

@@ -35,5 +35,11 @@ namespace Candyshop.Controllers
 
             return View(model);
         }
+
+        /*
+        public IActionResult PopularProductFilter(int filterValue)
+        {
+
+        }*/
     }
 }

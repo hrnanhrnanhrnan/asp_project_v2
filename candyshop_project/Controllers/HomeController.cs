@@ -12,21 +12,32 @@ namespace Candyshop.Controllers
     {
         private readonly ICandyRepository _candyRepository;
         private readonly ICurrencyRepository _currencyRepository;
+        private readonly IOrderRepository _orderRepository;
 
-        public HomeController(ICandyRepository candyRepository, ICurrencyRepository currencyRepository)
+        public HomeController(ICandyRepository candyRepository, ICurrencyRepository currencyRepository, IOrderRepository orderRepository)
         {
             _currencyRepository = currencyRepository;
+            _orderRepository = orderRepository;
             _candyRepository = candyRepository;
         }
         public IActionResult Index()
         {
-            _currencyRepository.GetSymbols();
-            var homeViewModel = new HomeViewModel
+            try
             {
-                CandyOnSale = _candyRepository.GetCandyOnSale
-            };
 
-            return View(homeViewModel);
+                _currencyRepository.GetSymbols();
+                var homeViewModel = new HomeViewModel
+                {
+                    CandyOnSale = _candyRepository.GetCandyOnSale,
+                    MostPopular = _candyRepository.GetMostPopular(6),
+                };
+
+                return View(homeViewModel);
+            }
+            catch
+            {
+                return StatusCode(500);
+            }
         }
     }
 }
