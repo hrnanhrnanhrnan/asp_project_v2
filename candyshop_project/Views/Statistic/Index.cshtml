@@ -54,6 +54,7 @@
 
     <h3>Popular products in last month</h3>
     <div>
+
         <table class="table table-striped" >
             <thead>
                 <tr>
@@ -112,7 +113,7 @@
     var revenueData= @Html.Raw(ViewBag.DataPointsRevenue);
     
     SaleAmountPerDay(amountPerDayChartData);
-    SaleRevenuePerDay(revenueData);
+
 
     /*---CHANGNING CURRENCIES OF PAGE---*/
     const select = document.getElementById("selectCurrency");
@@ -126,31 +127,48 @@
         originalValues.push(parseFloat(value.innerHTML.replace(",", ".")))
     });
 
-    const getTotalInCurrency = (currency) => {
-            $.ajax({
+    function GetRate(symbol){
+         $.ajax({
             url: "/Admin/GetTotalInCurrency",
             type: "get",
                     data: {
-                        "currency": currency, "orderDate": "@DateTime.Now"
+                        "currency": symbol, "orderDate": "@DateTime.Now"
             },
             success: function (data) {
-                if (data) {
-                    for (var i = 0; i < values.length; i++) {
-                        const number = originalValues[i] * parseFloat(data.replace(",", "."))
-                        values[i].innerHTML = `${number.toFixed(2)} ${currency}`
-                    }
-                } else {
-                    $("#orderTotal").html("ERROR")
-                }
+                getTotalInCurrency(symbol,data);
+                SaleRevenuePerDay(revenueData,data);
             }
-        })
+        });
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    function getTotalInCurrency(symbol,data){
+
+        for (var i = 0; i < values.length; i++) {
+            const number = originalValues[i] * parseFloat(data.replace(",", "."))
+            values[i].innerHTML = `${number.toFixed(2)} ${symbol}`
+        }
+
     };
 
     select.value = "SEK";
-    getTotalInCurrency(select.value);
+    GetRate(select.value);
     
     select.addEventListener("change", (e) => {
-        getTotalInCurrency(e.target.value)
+        GetRate(e.target.value)
     });
 
 

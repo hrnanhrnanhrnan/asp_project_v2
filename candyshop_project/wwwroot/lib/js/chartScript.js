@@ -30,13 +30,18 @@
 }
 
 
-function SaleRevenuePerDay(result) {
+function SaleRevenuePerDay(result, rate) {
 	var dataPoints = [];
 
-	for (var i = 0; i < result.length; i++) {
-		dataPoints.push({ x: new Date(result[i].Date), y: (result[i].Amount) });
-	}
-	
+	if (rate === undefined) {
+		for (var i = 0; i < result.length; i++) {
+			dataPoints.push({ x: new Date(result[i].Date), y: (result[i].Amount) });
+		}
+	} else {
+		for (var i = 0; i < result.length; i++) {
+			dataPoints.push({ x: new Date(result[i].Date), y: (result[i].Amount * parseFloat(rate.replace(",", ".")).toFixed(1)) });
+		}
+    }
 
 	var chart = new CanvasJS.Chart("chartContainerLine", {
 		animationEnabled: true,

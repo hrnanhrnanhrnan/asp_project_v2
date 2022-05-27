@@ -42,6 +42,5 @@ namespace Candyshop.Controllers
             model.Symbols.Sort();
             return View(model);
         }
-
     }
 }
