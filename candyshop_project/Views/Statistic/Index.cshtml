@@ -3,32 +3,6 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-    <script type="text/javascript">
-           function AjaxFormSubmit() {
-            //Set the URL.
-            var url = $("#myForm").attr("action");
- 
-            //Add the Field values to FormData object.
-            var formData = new FormData();
-            formData.append("filterValue", $("#optionval").val());
- 
-            $.ajax({
-                type: 'POST',
-                url: url,
-                data: formData,
-                processData: false,
-                contentType: false
-            }).done(function (response) {
-                console.log(response.popularProducts);
-
-                var trHTML = '';
-        $.each(response.popularProducts, function (i, item) {
-            trHTML += '<tr><td>' + item.name + '</td><td>' + item.price+ '</td><td>' + item.amount + '</td></tr>';
-        });
-        $('#popularProducts').empty().append(trHTML);
-            });
-        }
-    </script>
 </head>
 <body>
 
@@ -80,15 +54,6 @@
 
     <h3>Popular products in last month</h3>
     <div>
-    <form id="myForm" method="post" asp-controller="Statistic" asp-action="PopularProductFilter">
-        <select id="optionval">
-            <option value="100">100</option>
-            <option value="50">50</option>
-            <option value="10">10</option>
-        </select>
-        
-    <input type="button" value="Submit" onclick="AjaxFormSubmit()"/>
-    </form>
         <table class="table table-striped" >
             <thead>
                 <tr>
@@ -139,20 +104,36 @@
 
 <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script>
+<script type="text/javascript">
+
+    window.addEventListener('DOMContentLoaded', (event) => {
+    $("#image").hide();
+    var amountPerDayChartData= @Html.Raw(ViewBag.DataPointsAmountPerDay);
+    var revenueData= @Html.Raw(ViewBag.DataPointsRevenue);
+    
+    SaleAmountPerDay(amountPerDayChartData);
+    SaleRevenuePerDay(revenueData);
+
+    /*---CHANGNING CURRENCIES OF PAGE---*/
     const select = document.getElementById("selectCurrency");
-    let values = []
-    let originalValues = []
+
+    let values = [];
+    let originalValues = [];
+    values = $(".values").toArray();
+
+
+    values.map(value => {
+        originalValues.push(parseFloat(value.innerHTML.replace(",", ".")))
+    });
 
     const getTotalInCurrency = (currency) => {
-                $.ajax({
+            $.ajax({
             url: "/Admin/GetTotalInCurrency",
             type: "get",
                     data: {
                         "currency": currency, "orderDate": "@DateTime.Now"
             },
             success: function (data) {
-
                 if (data) {
                     for (var i = 0; i < values.length; i++) {
                         const number = originalValues[i] * parseFloat(data.replace(",", "."))
@@ -163,39 +144,17 @@
                 }
             }
         })
-    }
-    window.onload = function () {
+    };
 
- 
-        $("#image").hide();
-
-        var amountPerDayChartData= @Html.Raw(ViewBag.DataPointsAmountPerDay);
-        var revenueData= @Html.Raw(ViewBag.DataPointsRevenue);
-
-        values = $(".values").toArray();
-
-        values.map(value => {
-            originalValues.push(parseFloat(value.innerHTML.replace(",", ".")))
-        });
-
-
-        SaleAmountPerDay(amountPerDayChartData);
-        SaleRevenuePerDay(revenueData);
-
-        select.value = "SEK";
-        getTotalInCurrency(select.value);
-
-        
-
-
-    }
-
-
+    select.value = "SEK";
+    getTotalInCurrency(select.value);
+    
     select.addEventListener("change", (e) => {
         getTotalInCurrency(e.target.value)
-    })
+    });
 
 
+});
 
 </script>
 

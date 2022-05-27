@@ -32,9 +32,12 @@
 
 function SaleRevenuePerDay(result) {
 	var dataPoints = [];
+
 	for (var i = 0; i < result.length; i++) {
-		dataPoints.push({ x: new Date(result[i].Date), y: result[i].Amount });
+		dataPoints.push({ x: new Date(result[i].Date), y: (result[i].Amount) });
 	}
+	
+
 	var chart = new CanvasJS.Chart("chartContainerLine", {
 		animationEnabled: true,
 		theme: "light2",

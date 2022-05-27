@@ -12,7 +12,7 @@ namespace candyshop_project.Models.Repository
 
         List<StatisticalData> TopLoyalCustomersData();
         List<StatisticalData> InventoryData();
-        List<StatisticalData> PopularProducts(string filterValue);
+        List<StatisticalData> PopularProducts();
 
 
     }
