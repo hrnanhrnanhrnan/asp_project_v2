@@ -61,7 +61,7 @@ namespace Candyshop.Controllers
             }
         }
 
-
+        //Get orderlog by id and create orderlogviewmodel and send it to view
         public async Task<IActionResult> OrderLogDetails(int id)
         {
             var order = _orderRepo.GetOrderById(id);
@@ -78,6 +78,7 @@ namespace Candyshop.Controllers
 
                 try
                 {
+                    //fetch all currencys and the existing rates from api and sort out the existing currencys and add it to the viewmodels symbols property
                     var symbols = await _currencyRepository.GetSymbols();
                     var existingRates = _currencyRepository.GetRate("SEK", order.OrderPlaced).Rates;
 
@@ -86,9 +87,12 @@ namespace Candyshop.Controllers
 
                     try
                     {
+                        //fetch data from the api
                         HttpResponseMessage response = await client
                         .GetAsync($"https://api.distancematrix.ai/maps/api/distancematrix/json?origins={_warehouseOrigin}&destinations={order.City}&key={_token}");
 
+                        //if response is successfull deserialize to Root object and set duration and distance properties of viewmodel to data from the Root object
+                        //if not successfull or if any other exception is thrown, set distance and duration properties to "not found" and return viewmodel to view
                         if (response.IsSuccessStatusCode)
                         {
                             var data = await response.Content.ReadAsStringAsync();
@@ -119,6 +123,7 @@ namespace Candyshop.Controllers
                 }
             }
 
+            //if the orderlog isn't found, then set response statuscode to 404 not found and call the _ItemNotFound view and pass the id as an argument
             Response.StatusCode = 404;
             return View("_ItemNotFound", id);
         }
