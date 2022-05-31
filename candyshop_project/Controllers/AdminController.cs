@@ -36,6 +36,7 @@ namespace Candyshop.Controllers
             _currencyRepository = currencyRepository;
             client = new HttpClient();
         } 
+        //Destructor, disposes the client connection when finished calling this Controller
         ~AdminController()
         {
             client.Dispose();
@@ -46,10 +47,18 @@ namespace Candyshop.Controllers
             return View();
         }
 
+        //Gets all candy shopping orders and retruns them to OrderLogs view
         public IActionResult OrderLogs()
         {
-            var orders = _orderRepo.GetAllOrders();
-            return View(orders);
+            try
+            {
+                var orders = _orderRepo.GetAllOrders();
+                return View(orders);
+            }
+            catch
+            {
+                return BadRequest();
+            }
         }
 
 
@@ -115,6 +124,7 @@ namespace Candyshop.Controllers
         }
 
 
+        //input a string for currency type(USD, SEK etc) and a date, to get out what the type was worth at that date
         [HttpGet]
         public string GetTotalInCurrency(string currency, string orderDate)
         {
@@ -123,7 +133,6 @@ namespace Candyshop.Controllers
             var currencyRate = _currencyRepository.GetRate("SEK", date);
             if (currencyRate.Rates.TryGetValue(currency, out double rates))
             {
-
                 return $"{rates}";
             } else
             {
@@ -131,6 +140,8 @@ namespace Candyshop.Controllers
             }
         }
 
+        //Creates a new product if model is valid and then goes to details of the newly created product,
+        //otherwise returns to the same page
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult CreateProduct(CreateCandyViewModel candyVM)
@@ -140,10 +151,10 @@ namespace Candyshop.Controllers
                 var candy = _candyRepo.CreateCandy(candyVM);
                 return RedirectToAction("Details", "Candy", new { id = candy.CandyId});
             }
-
             return View(candyVM);
         }
 
+        //Jumps to CreateProduct page, while getting a list of all categories
         [HttpGet]
         public IActionResult CreateProduct()
         {
@@ -153,11 +164,18 @@ namespace Candyshop.Controllers
             return View(vm);
         }
 
+        //Gets the list of candies for admin editing, update and delete
         public IActionResult ListOfCandies()
         {
-            return View(_candyRepo.GetAllCandy);
+            var candyList = _candyRepo.GetAllCandy;
+            if (candyList == null)
+            {
+                return NotFound();
+            }
+            return View(candyList);
         }
 
+        //Gets the id in the list of candies, then returns to the update page
         [HttpGet]
         public IActionResult UpdateProduct(int id)
         {
@@ -172,6 +190,8 @@ namespace Candyshop.Controllers
             return View("_ItemNotFound", id);
         }
 
+        //On update page, when pressing update, run this.
+        //if model is valid, update then get back to candy list. Else stay on page.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult UpdateProduct(Candy model)
@@ -185,6 +205,7 @@ namespace Candyshop.Controllers
             return View(model);
         }
 
+        //Deletes candy by id on the selected object
         public IActionResult DeleteProduct(int id)
         {
             if (id == 0)
@@ -201,6 +222,7 @@ namespace Candyshop.Controllers
             return View(product);
         }
 
+        //Gets the candy to delete by id, if it's not null, delete it by id.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult DeleteProduct(Candy candyToDelete)
