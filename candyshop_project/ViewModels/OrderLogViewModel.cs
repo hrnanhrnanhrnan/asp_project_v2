@@ -15,6 +15,7 @@ namespace candyshop_project.ViewModels
         public string Distance { get; set; }
         public string Duration { get; set; }
         public List<Candy> Candies { get; set; }
+        public Dictionary<Candy, int> AmountPerCandy { get; set; } = new Dictionary<Candy, int>();
         public List<string> Symbols { get; set; }
         public CurrencyRepository CurrencyRate { get; set; } = new CurrencyRepository();
     }

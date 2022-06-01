@@ -6,17 +6,17 @@
 
 <h2>Order details</h2>
 
-    @{ if (Model.Symbols != null)
-        {
-            <h4>Choose currency: </h4>
-            <select id="selectCurrency">
-                @foreach (var item in Model.Symbols)
-                {
+@{ if (Model.Symbols != null)
+    {
+        <h4>Choose currency: </h4>
+        <select id="selectCurrency">
+            @foreach (var item in Model.Symbols)
+            {
                 <option>@item</option>
-                }
-            </select>
-        }
-        }
+            }
+        </select>
+    }
+}
 
 <table class="table">
     <thead>
@@ -48,15 +48,32 @@
 </table>
 
 <h2>Products</h2>
-<div>
-    @if (Model.Candies.Count > 0)
+
+
+@if (Model.Candies.Count > 0)
+{
+    foreach (var candy in Model.Candies)
     {
-        foreach (var candy in Model.Candies)
-        {
-            <partial name="_candyCard" model="new CandyCardViewModel { Candy=candy, BestDiscount=candy.FindBestDiscount(DateTime.Now) }" />
-        }
+        <div class="col-sm-4 col-lg-4 col-md-4">
+            <div class="thumbnail">
+                <img src="@candy.ImageThumbnailUrl" alt="imge for candy" />
+                <div class="caption">
+                    <h3 class="pull-right">
+                    </h3>
+                    <h3>@candy.Name</h3>
+                    <p>@candy.Description</p>
+                </div>
+                <div class="addToCart">
+                    <p>
+                        <strong>Amount: @Model.AmountPerCandy[candy]</strong>
+                    </p>
+                </div>
+            </div>
+        </div>
     }
-</div>
+}
+
+
 
 
 <script type="text/javascript">

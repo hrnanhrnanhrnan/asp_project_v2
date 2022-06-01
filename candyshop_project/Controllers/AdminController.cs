@@ -73,8 +73,15 @@ namespace Candyshop.Controllers
                 var orderLogViewModel = new OrderLogViewModel
                 {
                     Order = order,
-                    Candies = _orderDetailRepo.GetAllOrderDetails().Where(od => od.OrderId == order.OrderId).Select(c => c.Candy).ToList(),
+                    Candies = _orderDetailRepo.GetAllOrderDetails().Where(od => od.OrderId == order.OrderId).Select(c => c.Candy).ToList()
                 };
+
+                //populates the amountpercandy dictionary property with the candy as key and the amount from the orderdetails table where the order and candy is 
+                foreach (var candy in orderLogViewModel.Candies)
+                {
+                    orderLogViewModel.AmountPerCandy.Add(candy, _orderDetailRepo.GetAllOrderDetails().Where(od => od.OrderId == order.OrderId && od.CandyId == candy.CandyId)
+                        .Select(od => od.Amount).Sum());
+                }
 
                 try
                 {
