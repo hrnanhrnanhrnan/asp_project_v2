@@ -4,14 +4,16 @@ using Candyshop.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace candyshop_project.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220531162450_second")]
+    partial class second
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -614,19 +616,6 @@ namespace candyshop_project.Migrations
                         new
                         {
                             OrderId = 17,
-                            Address = "1165 Apple Lane",
-                            City = "Denver",
-                            FirstName = "Keren",
-                            LastName = "R. Fields",
-                            OrderPlaced = new DateTime(2022, 5, 31, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            OrderTotal = 123.75m,
-                            PhoneNumber = "309-263-5674",
-                            State = "Alabama",
-                            ZipCode = "80216"
-                        },
-                        new
-                        {
-                            OrderId = 18,
                             Address = "547 Davis Lane",
                             City = "Pittsburg",
                             FirstName = "Peter",
@@ -639,7 +628,7 @@ namespace candyshop_project.Migrations
                         },
                         new
                         {
-                            OrderId = 19,
+                            OrderId = 18,
                             Address = "1165 Apple Lane",
                             City = "Denver",
                             FirstName = "Keren",
@@ -652,7 +641,7 @@ namespace candyshop_project.Migrations
                         },
                         new
                         {
-                            OrderId = 20,
+                            OrderId = 19,
                             Address = "2886 Grey Fox Farm Road",
                             City = "Pittsburg",
                             FirstName = "Rosie",
@@ -665,7 +654,7 @@ namespace candyshop_project.Migrations
                         },
                         new
                         {
-                            OrderId = 21,
+                            OrderId = 20,
                             Address = "827 Kennedy Court",
                             City = "Pittsburg",
                             FirstName = "Eunice",
@@ -981,65 +970,57 @@ namespace candyshop_project.Migrations
                         new
                         {
                             OrderDetailId = 36,
-                            Amount = 25,
-                            CandyId = 9,
+                            Amount = 17,
+                            CandyId = 1,
                             OrderId = 17,
                             Price = 4.95m
                         },
                         new
                         {
                             OrderDetailId = 37,
-                            Amount = 17,
-                            CandyId = 1,
-                            OrderId = 18,
+                            Amount = 7,
+                            CandyId = 6,
+                            OrderId = 17,
                             Price = 4.95m
                         },
                         new
                         {
                             OrderDetailId = 38,
-                            Amount = 7,
-                            CandyId = 6,
-                            OrderId = 18,
+                            Amount = 12,
+                            CandyId = 9,
+                            OrderId = 17,
                             Price = 4.95m
                         },
                         new
                         {
                             OrderDetailId = 39,
-                            Amount = 12,
-                            CandyId = 9,
-                            OrderId = 18,
-                            Price = 4.95m
-                        },
-                        new
-                        {
-                            OrderDetailId = 40,
                             Amount = 25,
                             CandyId = 12,
-                            OrderId = 19,
+                            OrderId = 18,
                             Price = 6.95m
                         },
                         new
                         {
-                            OrderDetailId = 41,
+                            OrderDetailId = 40,
                             Amount = 17,
                             CandyId = 2,
-                            OrderId = 20,
+                            OrderId = 19,
+                            Price = 3.95m
+                        },
+                        new
+                        {
+                            OrderDetailId = 41,
+                            Amount = 29,
+                            CandyId = 10,
+                            OrderId = 19,
                             Price = 3.95m
                         },
                         new
                         {
                             OrderDetailId = 42,
-                            Amount = 29,
-                            CandyId = 10,
-                            OrderId = 20,
-                            Price = 3.95m
-                        },
-                        new
-                        {
-                            OrderDetailId = 43,
                             Amount = 42,
                             CandyId = 14,
-                            OrderId = 21,
+                            OrderId = 20,
                             Price = 2.95m
                         });
                 });
@@ -1097,7 +1078,7 @@ namespace candyshop_project.Migrations
                         new
                         {
                             Id = "1",
-                            ConcurrencyStamp = "1cbdc99e-448b-4a33-b0f7-5af6a58cea88",
+                            ConcurrencyStamp = "bdee995a-91dc-432b-b68e-d523f6e40dc5",
                             Name = "Admin",
                             NormalizedName = "Admin"
                         });
@@ -1196,15 +1177,15 @@ namespace candyshop_project.Migrations
                         {
                             Id = "1",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "4adaf653-7fce-4725-acc3-3f51a5031ad1",
+                            ConcurrencyStamp = "4f54249b-4a9a-4ece-9ef9-f2847b9e41d2",
                             Email = "admin@admin.se",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@ADMIN.SE",
                             NormalizedUserName = "ADMIN@ADMIN.SE",
-                            PasswordHash = "AQAAAAEAACcQAAAAEA9idgr1XluyKHmgZAkb+POH9icCRp4LW2t4dqrwqOh7NFqlZmB8R+B9I86CJSQ6sg==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEBZMGZRECcQYn1V+lL+2iZm8tQj1C2CvKyFTVZtVeSto8MW+Y1qnWEyKd86yLgkKfA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "35d66920-eaa3-47dc-a1dd-b1472fb2151e",
+                            SecurityStamp = "7d675bc6-d148-4eb8-8ee4-0d4531f2de1e",
                             TwoFactorEnabled = false,
                             UserName = "admin@admin.se"
                         });

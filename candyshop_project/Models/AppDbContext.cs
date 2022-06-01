@@ -210,7 +210,7 @@ namespace Candyshop.Models
                 City = "Denver",
                 State = "Alabama",
                 ZipCode = "80216",
-                OrderPlaced = new DateTime(2022, 04, 24),
+                OrderPlaced = new DateTime(2022, 05, 24),
                 OrderTotal = 118.75M,
             });
             modelBuilder.Entity<Order>().HasData(new Order
@@ -223,7 +223,7 @@ namespace Candyshop.Models
                 City = "Denver",
                 State = "Alabama",
                 ZipCode = "33610",
-                OrderPlaced = new DateTime(2022, 04, 24),
+                OrderPlaced = new DateTime(2022, 05, 24),
                 OrderTotal = 59.4M,
             });
             modelBuilder.Entity<Order>().HasData(new Order
@@ -236,7 +236,7 @@ namespace Candyshop.Models
                 City = "Pittsburg",
                 State = "California",
                 ZipCode = "94565",
-                OrderPlaced = new DateTime(2022, 04, 24),
+                OrderPlaced = new DateTime(2022, 05, 24),
                 OrderTotal = 128.5M,
             });
             modelBuilder.Entity<Order>().HasData(new Order
@@ -249,7 +249,7 @@ namespace Candyshop.Models
                 City = "Pittsburg",
                 State = "California",
                 ZipCode = "95814",
-                OrderPlaced = new DateTime(2022, 04, 25),
+                OrderPlaced = new DateTime(2022, 05, 25),
                 OrderTotal = 114.55M,
             });
             modelBuilder.Entity<Order>().HasData(new Order
@@ -262,7 +262,7 @@ namespace Candyshop.Models
                 City = "Pittsburg",
                 State = "California",
                 ZipCode = "02132",
-                OrderPlaced = new DateTime(2022, 04, 25),
+                OrderPlaced = new DateTime(2022, 05, 25),
                 OrderTotal = 146.75M,
             });
             modelBuilder.Entity<Order>().HasData(new Order
@@ -275,7 +275,7 @@ namespace Candyshop.Models
                 City = "Denver",
                 State = "Alabama",
                 ZipCode = "23320",
-                OrderPlaced = new DateTime(2022, 04, 26),
+                OrderPlaced = new DateTime(2022, 05, 26),
                 OrderTotal = 157.45M,
             });
             modelBuilder.Entity<Order>().HasData(new Order
@@ -288,7 +288,7 @@ namespace Candyshop.Models
                 City = "Pittsburg",
                 State = "California",
                 ZipCode = "77520",
-                OrderPlaced = new DateTime(2022, 04, 26),
+                OrderPlaced = new DateTime(2022, 05, 26),
                 OrderTotal = 139.35M,
             });
             modelBuilder.Entity<Order>().HasData(new Order
@@ -301,7 +301,7 @@ namespace Candyshop.Models
                 City = "Pittsburg",
                 State = "California",
                 ZipCode = "80216",
-                OrderPlaced = new DateTime(2022, 04, 26),
+                OrderPlaced = new DateTime(2022, 05, 26),
                 OrderTotal = 148.35M,
             });
             modelBuilder.Entity<Order>().HasData(new Order
@@ -314,7 +314,7 @@ namespace Candyshop.Models
                 City = "Denver",
                 State = "Alabama",
                 ZipCode = "95204",
-                OrderPlaced = new DateTime(2022, 04, 26),
+                OrderPlaced = new DateTime(2022, 05, 26),
                 OrderTotal = 165.1M,
             });
             modelBuilder.Entity<Order>().HasData(new Order
@@ -327,7 +327,7 @@ namespace Candyshop.Models
                 City = "Denver",
                 State = "Alabama",
                 ZipCode = "80216",
-                OrderPlaced = new DateTime(2022, 04, 27),
+                OrderPlaced = new DateTime(2022, 05, 27),
                 OrderTotal = 167.6M,
             });
             modelBuilder.Entity<Order>().HasData(new Order
@@ -340,7 +340,7 @@ namespace Candyshop.Models
                 City = "Pittsburg",
                 State = "California",
                 ZipCode = "80216",
-                OrderPlaced = new DateTime(2022, 04, 27),
+                OrderPlaced = new DateTime(2022, 05, 27),
                 OrderTotal = 163.25M,
             });
             modelBuilder.Entity<Order>().HasData(new Order
@@ -353,7 +353,7 @@ namespace Candyshop.Models
                 City = "Denver",
                 State = "Alabama",
                 ZipCode = "80216",
-                OrderPlaced = new DateTime(2022, 04, 28),
+                OrderPlaced = new DateTime(2022, 05, 28),
                 OrderTotal = 173,
             });
             modelBuilder.Entity<Order>().HasData(new Order
@@ -366,7 +366,7 @@ namespace Candyshop.Models
                 City = "Pittsburg",
                 State = "California",
                 ZipCode = "77520",
-                OrderPlaced = new DateTime(2022, 04, 29),
+                OrderPlaced = new DateTime(2022, 05, 29),
                 OrderTotal = 150.65M,
             });
             modelBuilder.Entity<Order>().HasData(new Order
@@ -379,7 +379,7 @@ namespace Candyshop.Models
                 City = "Denver",
                 State = "Alabama",
                 ZipCode = "80216",
-                OrderPlaced = new DateTime(2022, 04, 29),
+                OrderPlaced = new DateTime(2022, 05, 29),
                 OrderTotal = 149.05M,
             });
             modelBuilder.Entity<Order>().HasData(new Order
@@ -392,7 +392,7 @@ namespace Candyshop.Models
                 City = "Pittsburg",
                 State = "California",
                 ZipCode = "02132",
-                OrderPlaced = new DateTime(2022, 04, 29),
+                OrderPlaced = new DateTime(2022, 05, 29),
                 OrderTotal = 168.3M,
             });
             modelBuilder.Entity<Order>().HasData(new Order
@@ -405,25 +405,12 @@ namespace Candyshop.Models
                 City = "Pittsburg",
                 State = "California",
                 ZipCode = "80216",
-                OrderPlaced = new DateTime(2022, 04, 30),
+                OrderPlaced = new DateTime(2022, 05, 30),
                 OrderTotal = 138.9M,
             });
             modelBuilder.Entity<Order>().HasData(new Order
             {
                 OrderId = 17,
-                FirstName = "Peter",
-                LastName = "D. Murphy",
-                PhoneNumber = "720-323-6178",
-                Address = "547 Davis Lane",
-                City = "Pittsburg",
-                State = "California",
-                ZipCode = "80216",
-                OrderPlaced = new DateTime(2022, 05, 01),
-                OrderTotal = 178.2M,
-            });
-            modelBuilder.Entity<Order>().HasData(new Order
-            {
-                OrderId = 18,
                 FirstName = "Keren",
                 LastName = "R. Fields",
                 PhoneNumber = "309-263-5674",
@@ -431,12 +418,38 @@ namespace Candyshop.Models
                 City = "Denver",
                 State = "Alabama",
                 ZipCode = "80216",
-                OrderPlaced = new DateTime(2022, 05, 01),
-                OrderTotal = 173.75M,
+                OrderPlaced = new DateTime(2022, 05, 31),
+                OrderTotal = 123.75M,
+            });
+            modelBuilder.Entity<Order>().HasData(new Order
+            {
+                OrderId = 18,
+                FirstName = "Peter",
+                LastName = "D. Murphy",
+                PhoneNumber = "720-323-6178",
+                Address = "547 Davis Lane",
+                City = "Pittsburg",
+                State = "California",
+                ZipCode = "80216",
+                OrderPlaced = new DateTime(2022, 06, 01),
+                OrderTotal = 178.2M,
             });
             modelBuilder.Entity<Order>().HasData(new Order
             {
                 OrderId = 19,
+                FirstName = "Keren",
+                LastName = "R. Fields",
+                PhoneNumber = "309-263-5674",
+                Address = "1165 Apple Lane",
+                City = "Denver",
+                State = "Alabama",
+                ZipCode = "80216",
+                OrderPlaced = new DateTime(2022, 06, 01),
+                OrderTotal = 173.75M,
+            });
+            modelBuilder.Entity<Order>().HasData(new Order
+            {
+                OrderId = 20,
                 FirstName = "Rosie",
                 LastName = "J. Fails",
                 PhoneNumber = "281-834-4587",
@@ -444,12 +457,12 @@ namespace Candyshop.Models
                 City = "Pittsburg",
                 State = "California",
                 ZipCode = "95204",
-                OrderPlaced = new DateTime(2022, 05, 01),
+                OrderPlaced = new DateTime(2022, 06, 01),
                 OrderTotal = 181.7M,
             });
             modelBuilder.Entity<Order>().HasData(new Order
             {
-                OrderId = 20,
+                OrderId = 21,
                 FirstName = "Eunice",
                 LastName = "T. Stroud",
                 PhoneNumber = "774-563-0433",
@@ -457,7 +470,7 @@ namespace Candyshop.Models
                 City = "Pittsburg",
                 State = "California",
                 ZipCode = "02132",
-                OrderPlaced = new DateTime(2022, 05, 02),
+                OrderPlaced = new DateTime(2022, 06, 02),
                 OrderTotal = 123.9M,
             });
 
@@ -530,20 +543,21 @@ namespace Candyshop.Models
             modelBuilder.Entity<OrderDetail>().HasData(new OrderDetail { OrderDetailId = 34, OrderId = 16, CandyId = 10, Amount = 15, Price = 3.95M });
 
             modelBuilder.Entity<OrderDetail>().HasData(new OrderDetail { OrderDetailId = 35, OrderId = 16, CandyId = 3, Amount = 27, Price = 2.95M });
+            modelBuilder.Entity<OrderDetail>().HasData(new OrderDetail { OrderDetailId = 36, OrderId = 17, CandyId = 9, Amount = 25, Price =4.95M });
 
-            modelBuilder.Entity<OrderDetail>().HasData(new OrderDetail { OrderDetailId = 36, OrderId = 17, CandyId = 1, Amount = 17, Price = 4.95M });
+            modelBuilder.Entity<OrderDetail>().HasData(new OrderDetail { OrderDetailId = 37, OrderId = 18, CandyId = 1, Amount = 17, Price = 4.95M });
 
-            modelBuilder.Entity<OrderDetail>().HasData(new OrderDetail { OrderDetailId = 37, OrderId = 17, CandyId = 6, Amount = 7, Price = 4.95M });
+            modelBuilder.Entity<OrderDetail>().HasData(new OrderDetail { OrderDetailId = 38, OrderId = 18, CandyId = 6, Amount = 7, Price = 4.95M });
 
-            modelBuilder.Entity<OrderDetail>().HasData(new OrderDetail { OrderDetailId = 38, OrderId = 17, CandyId = 9, Amount = 12, Price = 4.95M });
+            modelBuilder.Entity<OrderDetail>().HasData(new OrderDetail { OrderDetailId = 39, OrderId = 18, CandyId = 9, Amount = 12, Price = 4.95M });
 
-            modelBuilder.Entity<OrderDetail>().HasData(new OrderDetail { OrderDetailId = 39, OrderId = 18, CandyId = 12, Amount = 25, Price = 6.95M });
+            modelBuilder.Entity<OrderDetail>().HasData(new OrderDetail { OrderDetailId = 40, OrderId = 19, CandyId = 12, Amount = 25, Price = 6.95M });
 
-            modelBuilder.Entity<OrderDetail>().HasData(new OrderDetail { OrderDetailId = 40, OrderId = 19, CandyId = 2, Amount = 17, Price = 3.95M });
+            modelBuilder.Entity<OrderDetail>().HasData(new OrderDetail { OrderDetailId = 41, OrderId = 20, CandyId = 2, Amount = 17, Price = 3.95M });
 
-            modelBuilder.Entity<OrderDetail>().HasData(new OrderDetail { OrderDetailId = 41, OrderId = 19, CandyId = 10, Amount = 29, Price = 3.95M });
+            modelBuilder.Entity<OrderDetail>().HasData(new OrderDetail { OrderDetailId = 42, OrderId = 20, CandyId = 10, Amount = 29, Price = 3.95M });
 
-            modelBuilder.Entity<OrderDetail>().HasData(new OrderDetail { OrderDetailId = 42, OrderId = 20, CandyId = 14, Amount = 42, Price = 2.95M });
+            modelBuilder.Entity<OrderDetail>().HasData(new OrderDetail { OrderDetailId = 43, OrderId = 21, CandyId = 14, Amount = 42, Price = 2.95M });
 
             //Campaign
             modelBuilder.Entity<Campaign>().HasData(new Campaign

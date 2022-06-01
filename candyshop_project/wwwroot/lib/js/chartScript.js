@@ -30,7 +30,7 @@
 }
 
 
-function SaleRevenuePerDay(result, rate) {
+function SaleRevenuePerDay(result, rate,symbol) {
 	var dataPoints = [];
 
 	if (rate === undefined) {
@@ -50,7 +50,7 @@ function SaleRevenuePerDay(result, rate) {
 			text: "Revenue per day"
 		},
 		axisY: {
-			title: "Revenue",
+			title: "Revenue ("+symbol+")",
 			gridThickness: 0,
 		},
 		axisX: {
